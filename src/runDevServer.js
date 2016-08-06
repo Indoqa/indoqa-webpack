@@ -1,4 +1,6 @@
 /* eslint-disable no-console */
+process.env.NODE_ENV = 'development'
+
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpack = require('webpack')

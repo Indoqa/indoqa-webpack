@@ -1,4 +1,6 @@
 /* eslint-disable no-console  */
+process.env.NODE_ENV = 'production'
+
 const chalk = require('chalk')
 const fs = require('fs')
 const path = require('path')
@@ -36,7 +38,6 @@ function printFileSizes(buildDir, stats) {
 }
 
 function build(config, options) {
-  process.env.NODE_ENV = 'production'
   console.log('Creating an optimized production build...')
 
   webpack(config).run((err, stats) => {
