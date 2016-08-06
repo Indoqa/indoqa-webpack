@@ -36,7 +36,6 @@ function printFileSizes(buildDir, stats) {
 }
 
 function build(config, options) {
-  process.env.NODE_ENV = 'production'
   console.log('Creating an optimized production build...')
 
   webpack(config).run((err, stats) => {
