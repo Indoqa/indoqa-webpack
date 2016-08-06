@@ -1,6 +1,4 @@
 /* eslint-disable no-console */
-process.env.NODE_ENV = 'development'
-
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpack = require('webpack')
@@ -12,6 +10,7 @@ const createConfig = require('./createConfig.js')
 const createOptions = require('./createOptions.js')
 
 const runDevServer = (devServerConfig) => {
+  console.log('process.env.NODE_ENV', process.env.NODE_ENV)
   const app = express()
   const {options: customOptions, routesCallback, indexHtml: customIndexHtml} = devServerConfig
   const config = createConfig(createOptions(customOptions))
