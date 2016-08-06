@@ -1,7 +1,7 @@
 {
   "name": "indoqa-webpack",
   "version": "0.5.2",
-  "description": "Simplified, opionated usage of Webpack as build tool and dev-server",
+  "description": "Simplified, opinionated usage of Webpack as build tool and dev-server",
   "main": "src/index.js",
   "author": "Indoqa Software Design und Beratung GmbH (https://www.indoqa.com)",
   "license": "Apache-2.0",
