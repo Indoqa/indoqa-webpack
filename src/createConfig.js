@@ -30,7 +30,7 @@ function createConfig(options) {
   return {
     devPort: options.devPort,
     hotPort: options.hotReloadPort,
-    devtool: isDevelopment ? 'cheap-module-eval-source-map' : '',
+    devtool: isDevelopment ? options.devtool : '',
     entry: {
       [options.appName]: isDevelopment ? [
         `webpack-hot-middleware/client?path=http://localhost:${options.hotReloadPort}/__webpack_hmr`,
@@ -94,6 +94,7 @@ function createConfig(options) {
           exclude: /node_modules/,
           include: path.join(process.cwd(), options.srcPath),
           query: {
+            babelrc: false,
             cacheDirectory: true,
             presets: ['es2015', 'react', 'stage-1'],
             env: {
@@ -132,7 +133,7 @@ function createConfig(options) {
         ...stylesLoaders,
       ]
     },
-    postcss: () => [autoprefixer({browsers: 'last 2 version'})]
+    postcss: () => [autoprefixer({browsers: options.autoprefixerBrowser})]
   }
 }
 
