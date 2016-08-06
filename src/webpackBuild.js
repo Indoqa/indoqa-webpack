@@ -1,4 +1,6 @@
 /* eslint-disable no-console  */
+process.env.NODE_ENV = 'production'
+
 const chalk = require('chalk')
 const fs = require('fs')
 const path = require('path')
