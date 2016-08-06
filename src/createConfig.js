@@ -1,4 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const path = require('path')
 const webpack = require('webpack')
@@ -43,7 +44,7 @@ function createConfig(options) {
       path: path.join(process.cwd(), options.outputPath),
       filename: isDevelopment ? '[name].js' : '[name]-[hash].js',
       chunkFilename: '[name]-[chunkhash].js',
-      publicPath: options.outputPublicPath,
+      publicPath: '/',
     },
     plugins: (() => {
       const plugins = [new webpack.DefinePlugin({
@@ -57,6 +58,11 @@ function createConfig(options) {
 
       if (isDevelopment) {
         plugins.push(
+          new HtmlWebpackPlugin({
+            title: options.appName,
+            inject: true,
+            template: path.join(__dirname, 'index.html'),
+          }),
           new webpack.optimize.OccurenceOrderPlugin(),
           new webpack.HotModuleReplacementPlugin())
       } else {

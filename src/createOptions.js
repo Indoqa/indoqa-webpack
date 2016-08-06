@@ -1,7 +1,6 @@
 const DEFAULT_OPTIONS = {
   appName: 'app',
   outputPath: './target/webpack/',
-  outputPublicPath: '/assets/',
   srcPath: './src',
   devPort: 3000,
   hotReloadPort: 3001,
