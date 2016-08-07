@@ -10,7 +10,7 @@
     "url": "git@github.com:Indoqa/indoqa-webpack.git"
   },
   "bin": {
-    "idq-webpack": "./bin/idq-webpack.js"
+    "indoqa-webpack": "./bin/indoqa-webpack.js"
   },
   "dependencies": {
     "autoprefixer": "^6.3.7",
