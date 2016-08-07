@@ -159,10 +159,11 @@ const createModules = (options, isDevelopment) => {
 
 const createEntry = (options, isDevelopment, isLibrary) => {
   const mainJsPath = path.join(process.cwd(), options.mainJs)
+  const playgroundJsPath = path.join(process.cwd(), options.playgroundJs)
   const appName = options.appName
 
   if (isDevelopment) {
-    const jsPath = options.playgroundJs ? path.join(process.cwd(), options.playgroundJs) : mainJsPath
+    const jsPath = options.isLibrary ? playgroundJsPath : mainJsPath
     return {
       [appName]: [`webpack-hot-middleware/client?path=http://localhost:${options.hotReloadPort}/__webpack_hmr`, jsPath]
     }
@@ -197,9 +198,12 @@ const addExternals = (options, config, isDevelopment, isLibrary) => {
     react: 'react',
     'react-dom': 'react-dom'
   }
-  const externals = Object.assign({}, reactExternals, options.externals)
-  config.externals = externals
+  config.externals = Object.assign({}, reactExternals, options.externals)
   return config
+}
+
+const createAutoPrefixer = (options) => {
+  return () => [autoprefixer({browsers: options.autoprefixerBrowser})]
 }
 
 const createConfig = (options) => {
@@ -211,7 +215,7 @@ const createConfig = (options) => {
     output: createOutput(options, isDevelopment, isLibrary),
     plugins: createPlugins(options, isDevelopment, isLibrary),
     module: createModules(options, isDevelopment),
-    postcss: () => [autoprefixer({browsers: options.autoprefixerBrowser})]
+    postcss: createAutoPrefixer(options)
   }
   config = addDevelopmentOptions(options, config, isDevelopment)
   config = addExternals(options, config, isDevelopment, isLibrary)

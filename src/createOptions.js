@@ -5,6 +5,7 @@ const DEFAULT_OPTIONS = {
   outputPublicPath: '/',
   srcPath: './src',
   mainJs: './src/main/index.js',
+  playgroundJs: './src/playground/index.js',
 
   devPort: 3000,
   hotReloadPort: 3001,
