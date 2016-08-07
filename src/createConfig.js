@@ -3,14 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const path = require('path')
 const webpack = require('webpack')
-const rimraf = require('rimraf')
 
 function createConfig(options) {
   const isDevelopment = process.env.NODE_ENV !== 'production'
-
-  if (options.outputPath) {
-    rimraf.sync(path.join(process.cwd(), options.outputPath))
-  }
 
   const loaders = {
     css: '',
@@ -44,7 +39,7 @@ function createConfig(options) {
       path: path.join(process.cwd(), options.outputPath),
       filename: isDevelopment ? '[name].js' : '[name]-[hash].js',
       chunkFilename: '[name]-[chunkhash].js',
-      publicPath: '/',
+      publicPath: isDevelopment ? '/' : options.outputPublicPath,
     },
     plugins: (() => {
       const plugins = [new webpack.DefinePlugin({
