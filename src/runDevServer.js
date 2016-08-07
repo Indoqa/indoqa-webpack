@@ -7,6 +7,8 @@ const express = require('express')
 const proxy = require('express-http-proxy')
 const createConfig = require('./createConfig.js')
 const createOptions = require('./createOptions.js')
+const version = require('../package.json').version
+const name = require('../package.json').name
 
 const runDevServer = (devServerConfig) => {
   const app = express()
@@ -25,7 +27,7 @@ const runDevServer = (devServerConfig) => {
   routesCallback({app, proxy})
 
   app.listen(config.hotPort, () => {
-    console.log(`Hot-server started at port ${config.hotPort}`)
+    console.log(`${name} v${version} started a hot-server at port ${config.hotPort}`)
   })
 
   app.listen(config.devPort, (error) => {

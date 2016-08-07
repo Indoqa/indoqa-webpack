@@ -10,6 +10,7 @@ const webpack = require('webpack')
 const stripAnsi = require('strip-ansi')
 const rimraf = require('rimraf')
 const version = require('../package.json').version
+const name = require('../package.json').name
 
 function printFileSizes(buildDir, stats) {
   const assets = stats.toJson().assets
@@ -40,7 +41,7 @@ function printFileSizes(buildDir, stats) {
 }
 
 function build(config, options) {
-  console.log(`indoqa-webpack v${version} is creating an optimized production build...`)
+  console.log(`${name} v${version} is creating an optimized production build...`)
 
   if (options.outputPath) {
     rimraf.sync(path.join(process.cwd(), options.outputPath))
