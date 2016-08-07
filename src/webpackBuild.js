@@ -12,7 +12,7 @@ const rimraf = require('rimraf')
 const version = require('../package.json').version
 const name = require('../package.json').name
 
-function printFileSizes(buildDir, stats) {
+const printFileSizes = (buildDir, stats) => {
   const assets = stats.toJson().assets
     .filter(asset => /\.(js|css)$/.test(asset.name))
     .map(asset => {
@@ -25,10 +25,13 @@ function printFileSizes(buildDir, stats) {
         sizeLabel: filesize(size)
       }
     })
+
   assets.sort((a, b) => b.size - a.size)
+
   const longestSizeLabelLength = Math.max.apply(null,
     assets.map(a => stripAnsi(a.sizeLabel).length)
   )
+
   assets.forEach(asset => {
     let sizeLabel = asset.sizeLabel
     const sizeLength = stripAnsi(sizeLabel).length
@@ -40,11 +43,13 @@ function printFileSizes(buildDir, stats) {
   })
 }
 
-function build(config, options) {
+const build = (config, options) => {
   console.log(`${name} v${version} is creating an optimized production build...`)
 
+  const buildDir = options.isLibrary ? options.outputLibraryPath : options.outputPath
+
   if (options.outputPath) {
-    rimraf.sync(path.join(process.cwd(), options.outputPath))
+    rimraf.sync(path.join(process.cwd(), buildDir))
   }
 
   webpack(config).run((err, stats) => {
@@ -56,10 +61,9 @@ function build(config, options) {
 
     console.log(chalk.green('Compiled successfully.'))
     console.log()
-
     console.log('File sizes:')
     console.log()
-    printFileSizes(options.outputPath, stats)
+    printFileSizes(buildDir, stats)
     console.log()
   })
 }

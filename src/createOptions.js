@@ -1,16 +1,23 @@
 const DEFAULT_OPTIONS = {
   appName: 'app',
+
   outputPath: './target/webpack/',
   outputPublicPath: '/',
   srcPath: './src',
+  mainJs: './src/main/index.js',
+
   devPort: 3000,
   hotReloadPort: 3001,
-  mainJs: './src/main/index.js',
-  autoprefixerBrowser: 'last 2 version',
   devtool: 'cheap-module-eval-source-map',
+
+  autoprefixerBrowser: 'last 2 version',
+
+  isLibrary: false,
+  outputLibraryPath: './dist/'
 }
 
-function createOptions(userOptions) {
+const createOptions = (userOptions) => {
+  userOptions.isLibrary = userOptions.isLibrary || userOptions.isReactLibrary
   return Object.assign({}, DEFAULT_OPTIONS, userOptions)
 }
 

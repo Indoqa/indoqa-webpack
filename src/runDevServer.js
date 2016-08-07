@@ -13,7 +13,8 @@ const name = require('../package.json').name
 const runDevServer = (devServerConfig) => {
   const app = express()
   const {options: customOptions, routesCallback} = devServerConfig
-  const config = createConfig(createOptions(customOptions))
+  const options = createOptions(customOptions)
+  const config = createConfig(options)
   const compiler = webpack(config)
 
   app.use(webpackDevMiddleware(compiler, {
@@ -24,7 +25,9 @@ const runDevServer = (devServerConfig) => {
 
   app.use(webpackHotMiddleware(compiler))
 
-  routesCallback({app, proxy})
+  if (typeof(routesCallback) === 'function') {
+    routesCallback({app, proxy})
+  }
 
   app.listen(config.hotPort, () => {
     console.log(`${name} v${version} started a hot-server at port ${config.hotPort}`)
