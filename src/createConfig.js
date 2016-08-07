@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const path = require('path')
 const webpack = require('webpack')
+const polyfills = require.resolve('./polyfills')
 
 const createOutput = (options, isDevelopment, isLibrary) => {
   if (isLibrary) {
@@ -164,17 +165,16 @@ const createEntry = (options, isDevelopment, isLibrary) => {
 
   if (isDevelopment) {
     const jsPath = options.isLibrary ? playgroundJsPath : mainJsPath
-    return {
-      [appName]: [`webpack-hot-middleware/client?path=http://localhost:${options.hotReloadPort}/__webpack_hmr`, jsPath]
-    }
+    const webpackHmr = `webpack-hot-middleware/client?path=http://localhost:${options.hotReloadPort}/__webpack_hmr`
+    return {[appName]: [webpackHmr, polyfills, jsPath]}
   }
 
   if (isLibrary) {
-    return mainJsPath
+    return [mainJsPath]
   }
 
   return {
-    [appName]: [mainJsPath]
+    [appName]: [polyfills, mainJsPath]
   }
 }
 
