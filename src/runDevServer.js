@@ -26,7 +26,7 @@ const runDevServer = (devServerConfig) => {
 
   app.use(webpackHotMiddleware(compiler))
 
-  if (typeof(routesCallback) === 'function') {
+  if (typeof(customRoutesCallback) === 'function') {
     customRoutesCallback({app, proxy})
   }
 
