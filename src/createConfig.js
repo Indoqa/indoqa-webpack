@@ -5,6 +5,11 @@ const path = require('path')
 const webpack = require('webpack')
 const polyfills = require.resolve('./polyfills')
 
+const REACT_EXTERNALS = {
+  react: 'react',
+  'react-dom': 'react-dom'
+}
+
 const createOutput = (options, isDevelopment, isLibrary) => {
   if (isLibrary) {
     return {
@@ -166,7 +171,9 @@ const createEntry = (options, isDevelopment, isLibrary) => {
   if (isDevelopment) {
     const jsPath = options.isLibrary ? playgroundJsPath : mainJsPath
     const webpackHmr = `webpack-hot-middleware/client?path=http://localhost:${options.hotReloadPort}/__webpack_hmr`
-    return {[appName]: [webpackHmr, polyfills, jsPath]}
+    return {
+      [appName]: [webpackHmr, polyfills, jsPath]
+    }
   }
 
   if (isLibrary) {
@@ -178,7 +185,7 @@ const createEntry = (options, isDevelopment, isLibrary) => {
   }
 }
 
-const addDevelopmentOptions = (options, config, isDevelopment) => {
+const addDevelopmentOptions = (config, options, isDevelopment) => {
   if (isDevelopment) {
     const portOptions = {
       devPort: options.devPort,
@@ -190,15 +197,11 @@ const addDevelopmentOptions = (options, config, isDevelopment) => {
   return config
 }
 
-const addExternals = (options, config, isDevelopment, isLibrary) => {
+const addExternals = (config, options, isDevelopment, isLibrary) => {
   if (isDevelopment || !isLibrary) {
     return config
   }
-  const reactExternals = {
-    react: 'react',
-    'react-dom': 'react-dom'
-  }
-  config.externals = Object.assign({}, reactExternals, options.externals)
+  config.externals = Object.assign({}, REACT_EXTERNALS, options.externals)
   return config
 }
 
@@ -217,8 +220,8 @@ const createConfig = (options) => {
     module: createModules(options, isDevelopment),
     postcss: createAutoPrefixer(options)
   }
-  config = addDevelopmentOptions(options, config, isDevelopment)
-  config = addExternals(options, config, isDevelopment, isLibrary)
+  config = addDevelopmentOptions(config, options, isDevelopment)
+  config = addExternals(config, options, isDevelopment, isLibrary)
 
   return config
 }

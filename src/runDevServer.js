@@ -11,11 +11,12 @@ const version = require('../package.json').version
 const name = require('../package.json').name
 
 const runDevServer = (devServerConfig) => {
-  const app = express()
-  const {options: customOptions, routesCallback} = devServerConfig
+  const {options: customOptions, routesCallback: customRoutesCallback} = devServerConfig
   const options = createOptions(customOptions)
   const config = createConfig(options)
   const compiler = webpack(config)
+
+  const app = express()
 
   app.use(webpackDevMiddleware(compiler, {
     headers: {'Access-Control-Allow-Origin': '*'},
@@ -26,7 +27,7 @@ const runDevServer = (devServerConfig) => {
   app.use(webpackHotMiddleware(compiler))
 
   if (typeof(routesCallback) === 'function') {
-    routesCallback({app, proxy})
+    customRoutesCallback({app, proxy})
   }
 
   app.listen(config.hotPort, () => {

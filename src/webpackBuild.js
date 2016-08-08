@@ -16,13 +16,15 @@ const printFileSizes = (buildDir, stats) => {
   const assets = stats.toJson().assets
     .filter(asset => /\.(js|css)$/.test(asset.name))
     .map(asset => {
-      const fileContents = fs.readFileSync(`${buildDir}/${asset.name}`)
+      const assetPath = path.join(buildDir, asset.name)
+      const fileContents = fs.readFileSync(assetPath)
+      const originalSize = fs.statSync(assetPath)['size']
       const size = gzipSize(fileContents)
       return {
         folder: path.join(buildDir, path.dirname(asset.name)),
         name: path.basename(asset.name),
         size,
-        sizeLabel: filesize(size)
+        sizeLabel: `${chalk.cyan(filesize(size))} (${filesize(originalSize)})`
       }
     })
 
@@ -39,7 +41,7 @@ const printFileSizes = (buildDir, stats) => {
       const rightPadding = ' '.repeat(longestSizeLabelLength - sizeLength)
       sizeLabel += rightPadding
     }
-    console.log(`  ${sizeLabel}  ${chalk.dim(asset.folder + path.sep)}${chalk.cyan(asset.name)}`)
+    console.log(`  ${sizeLabel}  ${asset.folder}${path.sep}${chalk.cyan(asset.name)}`)
   })
 }
 
