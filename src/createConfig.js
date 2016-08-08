@@ -95,8 +95,8 @@ const createLoaders = (options, isDevelopment) => {
       test: /\.(gif|jpg|png)$/,
       loader: 'url-loader?limit=10000',
     }, {
+      test: /favicon\.ico$/,
       loader: 'url-loader?limit=1',
-      test: /favicon\.ico$/
     },
     ...stylesLoaders,
   ]
