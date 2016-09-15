@@ -30,6 +30,10 @@ const runDevServer = (devServerConfig) => {
     customRoutesCallback({app, proxy})
   }
 
+  app.use('*', proxy(`http://localhost:${config.devPort}`, {
+    forwardPath: () => '/'
+  }))
+
   app.listen(config.hotPort, () => {
     console.log(`${name} v${version} started a hot-server at port ${config.hotPort}`)
   })
