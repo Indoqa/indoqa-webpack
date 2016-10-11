@@ -10,6 +10,7 @@ const DEFAULT_OPTIONS = {
   devPort: 3000,
   hotReloadPort: 3001,
   devtool: 'cheap-module-eval-source-map',
+  createIndexHtml: false,
 
   autoprefixerBrowser: 'last 2 version',
 

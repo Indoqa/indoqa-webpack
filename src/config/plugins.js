@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const createPlugins = (options, isDevelopment, isLibrary) => {
+const createPlugins = (options, isDevelopment, isLibrary, createIndexHtml) => {
   const definePlugin = new webpack.DefinePlugin({
     'process.env': {
       IS_BROWSER: true,
@@ -13,12 +13,13 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
     },
   })
 
+  const createIndexHTMLPlugin = new HtmlWebpackPlugin({
+    title: options.appName,
+    inject: true,
+    template: path.join(__dirname, 'index.html'),
+  })
+
   const hotRunPlugins = [
-    new HtmlWebpackPlugin({
-      title: options.appName,
-      inject: true,
-      template: path.join(__dirname, 'index.html'),
-    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ]
@@ -52,7 +53,11 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
   }
 
   if (isDevelopment) {
-    return [definePlugin, ...hotRunPlugins]
+    return [definePlugin, createIndexHTMLPlugin, ...hotRunPlugins]
+  }
+
+  if (createIndexHtml) {
+    return [definePlugin, extractTextProdPlugin, createIndexHTMLPlugin, ...compilePlugins]
   }
 
   return [definePlugin, extractTextProdPlugin, ...compilePlugins]

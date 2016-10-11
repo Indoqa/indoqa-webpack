@@ -9,11 +9,12 @@ const addDevelopmentOptions = require('./config/developmentOptions.js')
 const createConfig = (options) => {
   const isDevelopment = process.env.NODE_ENV !== 'production'
   const isLibrary = options.isLibrary
+  const createIndexHtml = options.createIndexHtml
 
   let config = {
     entry: createEntry(options, isDevelopment, isLibrary),
     output: createOutput(options, isDevelopment, isLibrary),
-    plugins: createPlugins(options, isDevelopment, isLibrary),
+    plugins: createPlugins(options, isDevelopment, isLibrary, createIndexHtml),
     module: {
       loaders: createLoaders(options, isDevelopment),
     },
