@@ -9,6 +9,9 @@
     "type": "git",
     "url": "git@github.com:Indoqa/indoqa-webpack.git"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "bin": {
     "indoqa-webpack": "./bin/indoqa-webpack.js"
   },
