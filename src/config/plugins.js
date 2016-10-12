@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const createPlugins = (options, isDevelopment, isLibrary, createIndexHtml) => {
+const createPlugins = (options, isDevelopment, isLibrary) => {
   const definePlugin = new webpack.DefinePlugin({
     'process.env': {
       IS_BROWSER: true,
@@ -56,7 +56,7 @@ const createPlugins = (options, isDevelopment, isLibrary, createIndexHtml) => {
     return [definePlugin, createIndexHTMLPlugin, ...hotRunPlugins]
   }
 
-  if (createIndexHtml) {
+  if (options.createIndexHtml) {
     return [definePlugin, extractTextProdPlugin, createIndexHTMLPlugin, ...compilePlugins]
   }
 
