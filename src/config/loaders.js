@@ -35,12 +35,7 @@ const createLoaders = (options, isDevelopment) => {
           },
           production: {
             // see https://github.com/thejameskyle/babel-react-optimize
-            plugins: [
-              'transform-react-constant-elements',
-              'transform-react-inline-elements',
-              'transform-react-remove-prop-types',
-              'transform-react-pure-class-to-function',
-            ],
+            plugins: options.babelLoaderProdPlugins,
           },
         },
       },

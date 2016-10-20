@@ -11,7 +11,12 @@ const DEFAULT_OPTIONS = {
   hotReloadPort: 3001,
   devtool: 'cheap-module-eval-source-map',
   createIndexHtml: false,
-
+  babelLoaderProdPlugins: [
+    'transform-react-constant-elements',
+    // 'transform-react-inline-elements',
+    // 'transform-react-remove-prop-types',
+    // 'transform-react-pure-class-to-function',
+  ],
   autoprefixerBrowser: 'last 2 version',
 
   isLibrary: false,
