@@ -12,6 +12,9 @@ const rimraf = require('rimraf')
 const version = require('../package.json').version
 const name = require('../package.json').name
 
+const createConfig = require('./createConfig.js')
+const createOptions = require('./createOptions.js')
+
 const printFileSizes = (buildDir, stats) => {
   const assets = stats.toJson().assets
     .filter(asset => /\.(js|css)$/.test(asset.name))
@@ -45,8 +48,11 @@ const printFileSizes = (buildDir, stats) => {
   })
 }
 
-const build = (config, options) => {
+const build = (projectOptions) => {
   console.log(`${name} v${version} is creating an optimized production build...`)
+
+  const options = createOptions(projectOptions)
+  const config = createConfig(options)
 
   const buildDir = options.isLibrary ? options.outputLibraryPath : options.outputPath
 
