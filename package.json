@@ -1,6 +1,6 @@
 {
   "name": "indoqa-webpack",
-  "version": "0.7.2-SNAPSHOT",
+  "version": "0.7.5",
   "description": "Simplified, opinionated usage of Webpack as build tool and dev-server",
   "main": "src/index.js",
   "author": "Indoqa Software Design und Beratung GmbH (https://www.indoqa.com)",
@@ -16,7 +16,8 @@
     "lint": "eslint ."
   },
   "bin": {
-    "indoqa-webpack": "./bin/indoqa-webpack.js"
+    "indoqa-webpack": "./bin/indoqa-webpack.js",
+    "indoqa-eslint": "./bin/indoqa-eslint.js"
   },
   "dependencies": {
     "autoprefixer": "^6.4.1",
@@ -31,6 +32,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.14.0",
     "chalk": "^1.1.3",
+    "cross-spawn": "^5.0.1",
     "css-loader": "^0.25.0",
     "eslint": "^3.9.1",
     "eslint-config-indoqa": "^1.1.0",
