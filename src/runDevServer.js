@@ -26,23 +26,23 @@ const runDevServer = (devServerConfig) => {
 
   app.use(webpackHotMiddleware(compiler))
 
-  if (typeof(customRoutesCallback) === 'function') {
+  if (typeof customRoutesCallback === 'function') {
     customRoutesCallback({app, proxy})
   }
 
-  app.use('*', proxy(`http://localhost:${config.devPort}`, {
+  app.use('*', proxy(`http://localhost:${options.devPort}`, {
     forwardPath: () => '/'
   }))
 
-  app.listen(config.hotPort, () => {
-    console.log(`${name} v${version} started a hot-server at port ${config.hotPort}`)
+  app.listen(options.hotReloadPort, () => {
+    console.log(`${name} v${version} started a hot-server at port ${options.hotReloadPort}`)
   })
 
-  app.listen(config.devPort, (error) => {
+  app.listen(options.devPort, (error) => {
     if (error) {
       console.error(error)
     } else {
-      console.info(chalk.green(`Listening on port ${config.devPort}.`)
+      console.info(chalk.green(`Listening on port ${options.devPort}.`)
       )
     }
   })

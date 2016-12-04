@@ -1,6 +1,4 @@
 /* eslint-disable no-console  */
-process.env.NODE_ENV = 'production'
-
 const chalk = require('chalk')
 const fs = require('fs')
 const path = require('path')
@@ -18,7 +16,7 @@ const createOptions = require('./createOptions.js')
 const printFileSizes = (buildDir, stats) => {
   const assets = stats.toJson().assets
     .filter(asset => /\.(js|css)$/.test(asset.name))
-    .map(asset => {
+    .map((asset) => {
       const assetPath = path.join(buildDir, asset.name)
       const fileContents = fs.readFileSync(assetPath)
       const originalSize = fs.statSync(assetPath)['size']
@@ -37,7 +35,7 @@ const printFileSizes = (buildDir, stats) => {
     assets.map(a => stripAnsi(a.sizeLabel).length)
   )
 
-  assets.forEach(asset => {
+  assets.forEach((asset) => {
     let sizeLabel = asset.sizeLabel
     const sizeLength = stripAnsi(sizeLabel).length
     if (sizeLength < longestSizeLabelLength) {
@@ -49,6 +47,7 @@ const printFileSizes = (buildDir, stats) => {
 }
 
 const build = (projectOptions) => {
+  process.env.NODE_ENV = 'production'
   console.log(`${name} v${version} is creating an optimized production build...`)
 
   const options = createOptions(projectOptions)

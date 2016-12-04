@@ -1,4 +1,5 @@
 const path = require('path')
+
 const polyfills = require.resolve('../polyfills.js')
 
 const createEntry = (options, isDevelopment, isLibrary) => {

@@ -7,7 +7,7 @@ const createLoaders = (options, isDevelopment) => {
     styl: '!stylus-loader',
   }
 
-  const stylesLoaders = Object.keys(styleLoaderMappings).map(ext => {
+  const stylesLoaders = Object.keys(styleLoaderMappings).map((ext) => {
     const prefix = 'css-loader!postcss-loader'
     const extLoaders = prefix + styleLoaderMappings[ext]
     const loader = isDevelopment
