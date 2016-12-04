@@ -35,7 +35,7 @@
     "cross-spawn": "^5.0.1",
     "css-loader": "^0.25.0",
     "eslint": "^3.9.1",
-    "eslint-config-indoqa": "^1.1.0",
+    "eslint-config-indoqa": "^1.1.1",
     "eslint-plugin-import": "^2.1.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.6.0",
