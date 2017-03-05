@@ -28,7 +28,7 @@ const createLoaders = (options, isDevelopment) => {
       query: {
         babelrc: false,
         cacheDirectory: true,
-        presets: ['es2015', 'react', 'stage-1'],
+        presets: ['babel-preset-react-app'],
         env: {
           development: {
             presets: ['react-hmre'],
