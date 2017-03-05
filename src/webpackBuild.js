@@ -15,7 +15,7 @@ const createOptions = require('./createOptions.js')
 
 const printFileSizes = (buildDir, stats) => {
   const assets = stats.toJson().assets
-    .filter(asset => /\.(js|css)$/.test(asset.name))
+    .filter((asset) => /\.(js|css)$/.test(asset.name))
     .map((asset) => {
       const assetPath = path.join(buildDir, asset.name)
       const fileContents = fs.readFileSync(assetPath)
@@ -32,7 +32,7 @@ const printFileSizes = (buildDir, stats) => {
   assets.sort((a, b) => b.size - a.size)
 
   const longestSizeLabelLength = Math.max.apply(null,
-    assets.map(a => stripAnsi(a.sizeLabel).length)
+    assets.map((a) => stripAnsi(a.sizeLabel).length)
   )
 
   assets.forEach((asset) => {

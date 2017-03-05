@@ -5,12 +5,15 @@ const webpack = require('webpack')
 const chalk = require('chalk')
 const express = require('express')
 const proxy = require('express-http-proxy')
+
 const createConfig = require('./createConfig.js')
 const createOptions = require('./createOptions.js')
 const version = require('../package.json').version
 const name = require('../package.json').name
 
 const runDevServer = (devServerConfig) => {
+  process.env.NODE_ENV = 'development'
+
   const {options: customOptions, routesCallback: customRoutesCallback} = devServerConfig
   const options = createOptions(customOptions)
   const config = createConfig(options)
