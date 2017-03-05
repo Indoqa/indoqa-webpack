@@ -1,6 +1,9 @@
 #! /usr/bin/env node
 const jest = require('jest')
 const path = require('path')
+
+process.env.NODE_ENV = 'test'
+
 const createJestConfig = require('../src/jest/createJestConfig.js')
 
 const argv = process.argv.slice(2)
