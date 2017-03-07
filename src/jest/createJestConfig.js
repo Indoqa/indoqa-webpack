@@ -6,6 +6,7 @@ module.exports = (resolve) => {
     testPathIgnorePatterns: [
       '<rootDir>[/\\\\](build|docs|node_modules|node|scripts)[/\\\\]'
     ],
+    coverageDirectory: '<rootDir>/target/coverage-jest',
     testEnvironment: 'node',
     testURL: 'http://localhost',
     transform: {
