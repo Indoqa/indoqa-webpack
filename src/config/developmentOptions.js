@@ -1,11 +1,11 @@
 const addDevelopmentOptions = (config, options, isDevelopment) => {
   if (isDevelopment) {
-    const portOptions = {
+    const developmentOptions = {
       devPort: options.devPort,
       hotPort: options.hotReloadPort,
       devtool: options.devtool,
     }
-    return Object.assign({}, config, portOptions)
+    return Object.assign({}, config, developmentOptions)
   }
   return config
 }

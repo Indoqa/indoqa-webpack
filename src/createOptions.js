@@ -9,7 +9,9 @@ const DEFAULT_OPTIONS = {
 
   devPort: 3000,
   hotReloadPort: 3001,
-  devtool: 'eval-source-map',
+  devtool: 'cheap-eval-source-map',
+  uglify: true,
+  createSourceMap: true,
   createIndexHtml: false,
   babelLoaderProdPlugins: [
     'transform-react-constant-elements',

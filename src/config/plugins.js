@@ -4,6 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const createPlugins = (options, isDevelopment, isLibrary) => {
+  console.log('options', options)
   const definePlugin = new webpack.DefinePlugin({
     'process.env': {
       IS_BROWSER: true,
@@ -30,23 +31,33 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
   const compilePlugins = [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        screw_ie8: true,
-        warnings: false,
-      },
-      mangle: {
-        screw_ie8: true,
-      },
-      output: {
-        comments: false,
-        screw_ie8: true,
-      },
-    }),
-    new webpack.SourceMapDevToolPlugin({
-      filename: '[file].map',
-    })
   ]
+
+  if (options.uglify) {
+    compilePlugins.push(
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          screw_ie8: true,
+          warnings: false,
+        },
+        mangle: {
+          screw_ie8: true,
+        },
+        output: {
+          comments: false,
+          screw_ie8: true,
+        },
+      })
+    )
+  }
+
+  if (options.createSourceMap) {
+    compilePlugins.push(
+      new webpack.SourceMapDevToolPlugin({
+        filename: '[file].map',
+      })
+    )
+  }
 
   if (isLibrary && !isDevelopment) {
     return [extractTextLibraryPlugin, ...compilePlugins]
