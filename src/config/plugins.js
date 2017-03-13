@@ -4,7 +4,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const createPlugins = (options, isDevelopment, isLibrary) => {
-  console.log('options', options)
   const definePlugin = new webpack.DefinePlugin({
     'process.env': {
       IS_BROWSER: true,
