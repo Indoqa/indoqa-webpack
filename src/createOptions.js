@@ -1,7 +1,7 @@
 const DEFAULT_OPTIONS = {
   appName: 'app',
 
-  outputPath: './target/webpack/',
+  outputPath: './target/assets/',
   outputPublicPath: '/',
   srcPath: './src',
   mainJs: './src/main/index.js',
