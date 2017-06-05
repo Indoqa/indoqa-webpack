@@ -18,31 +18,29 @@ The goal of indoqa-webpack is supporting following use cases:
 
 ## Usage
 
-TBD
-
 ### Production build
 
-TBD
+TBD (es6, pollyfills, css extraction, usage, ref to sample)
 
 ### Dev mode
 
-TBD
+TBD (dev server, hot-reload, usage, ref to sample)
 
 ### Building libraries
 
-TBD
+TBD (externals, peer dependencies, .npmignore, usage, ref to sample)
 
 ### Setting up a playground (usually for libraries)
 
-TBD
+TBD (usage, ref to sample)
 
 ### Jest
 
-TBD
+TBD (directory structure, usage, ref to sample)
 
 ### ESLint configuration
 
-TBD
+TBD (usage, ref to sample)
 
 ## Todos
 
