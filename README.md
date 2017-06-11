@@ -45,3 +45,5 @@ TBD (usage, ref to sample)
 ## Todos
 
  * Webpack 2 support
+ * preset env
+ * cache-loader
