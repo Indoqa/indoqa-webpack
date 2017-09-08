@@ -11,7 +11,7 @@ const createEntry = (options, isDevelopment, isLibrary) => {
     const jsPath = options.isLibrary ? playgroundJsPath : mainJsPath
     const webpackHmr = `webpack-hot-middleware/client?path=http://localhost:${options.hotReloadPort}/__webpack_hmr`
     return {
-      [appName]: [webpackHmr, polyfills, jsPath]
+      [appName]: [webpackHmr, polyfills, jsPath],
     }
   }
 
@@ -20,7 +20,7 @@ const createEntry = (options, isDevelopment, isLibrary) => {
   }
 
   return {
-    [appName]: [polyfills, mainJsPath]
+    [appName]: [polyfills, mainJsPath],
   }
 }
 

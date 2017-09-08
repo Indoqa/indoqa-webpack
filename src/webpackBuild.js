@@ -25,7 +25,7 @@ const printFileSizes = (buildDir, stats) => {
         folder: path.join(buildDir, path.dirname(asset.name)),
         name: path.basename(asset.name),
         size,
-        sizeLabel: `${chalk.cyan(filesize(size))} (${filesize(originalSize)})`
+        sizeLabel: `${chalk.cyan(filesize(size))} (${filesize(originalSize)})`,
       }
     })
 

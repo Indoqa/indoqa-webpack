@@ -22,7 +22,7 @@ const DEFAULT_OPTIONS = {
   autoprefixerBrowser: 'last 2 version',
 
   isLibrary: false,
-  outputLibraryPath: './dist/'
+  outputLibraryPath: './dist/',
 }
 
 const createOptions = (userOptions) => {

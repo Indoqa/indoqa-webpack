@@ -16,7 +16,7 @@ module.exports = (resolve) => {
     },
     transformIgnorePatterns: [
       '[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'
-    ]
+    ],
   }
   return config
 }

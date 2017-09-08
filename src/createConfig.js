@@ -17,7 +17,7 @@ const createConfig = (options) => {
     module: {
       loaders: createLoaders(options, isDevelopment),
     },
-    postcss: createPostCSS(options)
+    postcss: createPostCSS(options),
   }
   config = addDevelopmentOptions(config, options, isDevelopment)
   config = addExternals(config, options, isDevelopment, isLibrary)

@@ -1,6 +1,6 @@
 const REACT_EXTERNALS = {
   react: 'react',
-  'react-dom': 'react-dom'
+  'react-dom': 'react-dom',
 }
 
 const addExternals = (config, options, isDevelopment, isLibrary) => {
