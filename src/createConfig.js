@@ -11,8 +11,23 @@ const createConfig = (options) => {
   const isLibrary = options.isLibrary
   const config = {
     entry: createEntry(options, isDevelopment, isLibrary),
-    output: createOutput(options, isDevelopment, isLibrary)
+    output: createOutput(options, isDevelopment, isLibrary),
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: /(node_modules)/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ["es2015", "react"]
+            }
+          }
+        }
+      ]
+    }
   }
+  console.log('config=', config)
   return config
 }
 
