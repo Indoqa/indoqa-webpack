@@ -9,6 +9,16 @@ const addDevelopmentOptions = require('./config/developmentOptions.js')
 const createConfig = (options) => {
   const isDevelopment = process.env.NODE_ENV !== 'production'
   const isLibrary = options.isLibrary
+  const config = {
+    entry: createEntry(options, isDevelopment, isLibrary),
+    output: createOutput(options, isDevelopment, isLibrary)
+  }
+  return config
+}
+
+const createConfig1 = (options) => {
+  const isDevelopment = process.env.NODE_ENV !== 'production'
+  const isLibrary = options.isLibrary
 
   let config = {
     entry: createEntry(options, isDevelopment, isLibrary),
