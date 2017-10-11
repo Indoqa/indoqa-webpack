@@ -26,52 +26,56 @@ const createJavascriptRule = () => {
   }
 }
 
+const createStyleLoader = () => {
+  return {
+    loader: require.resolve('style-loader'),
+    options: {
+      hmr: false,
+    },
+  }
+}
+
+const createCssLoader = options => {
+  return {
+    loader: require.resolve('css-loader'),
+    options: {
+      importLoaders: 1,
+      minimize: true,
+      sourceMap: options.createSourceMap,
+    },
+  }
+}
+
+const createPostCssLoader = options => {
+  return {
+    loader: require.resolve('postcss-loader'),
+    options: {
+      // Necessary for external CSS imports to work
+      // https://github.com/facebookincubator/create-react-app/issues/2677
+      ident: 'postcss',
+      plugins: () => [
+        require('postcss-flexbugs-fixes'),
+        autoprefixer({
+          browsers: options.autoprefixerBrowser,
+          flexbox: 'no-2009',
+        }),
+      ],
+    },
+  }
+}
+
 const createCssRule = options => {
   return {
     test: /\.css$/,
     loader: ExtractTextPlugin.extract(
       Object.assign(
         {
-          fallback: {
-            loader: require.resolve('style-loader'),
-            options: {
-              hmr: false,
-            },
-          },
-          use: [
-            {
-              loader: require.resolve('css-loader'),
-              options: {
-                importLoaders: 1,
-                minimize: true,
-                sourceMap: options.createSourceMap,
-              },
-            },
-            {
-              loader: require.resolve('postcss-loader'),
-              options: {
-                // Necessary for external CSS imports to work
-                // https://github.com/facebookincubator/create-react-app/issues/2677
-                ident: 'postcss',
-                plugins: () => [
-                  require('postcss-flexbugs-fixes'),
-                  autoprefixer({
-                    browsers: [
-                      '>1%',
-                      'last 4 versions',
-                      'Firefox ESR',
-                      'not ie < 11',
-                    ],
-                    flexbox: 'no-2009',
-                  }),
-                ],
-              },
-            },
-          ],
+          fallback: createStyleLoader(),
+          use: [createCssLoader(options), createPostCssLoader(options)],
         },
         {}
       )
-    )
+    ),
   }
 }
 

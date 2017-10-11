@@ -3,11 +3,16 @@ const addDevelopmentOptions = (config, options, isDevelopment) => {
     const developmentOptions = {
       devPort: options.devPort,
       hotPort: options.hotReloadPort,
-      devtool: options.devtool,
+      devtool: options.createSourceMap ? 'cheap-module-source-map' : false,
     }
     return Object.assign({}, config, developmentOptions)
   }
-  return config
+
+  const prodOptions = {
+    devtool: options.createSourceMap ? 'source-map' : false,
+  }
+
+  return Object.assign({}, config, prodOptions)
 }
 
 module.exports = exports = addDevelopmentOptions
