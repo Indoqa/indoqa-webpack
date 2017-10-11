@@ -9,7 +9,7 @@ const createEntry = (options, isDevelopment, isLibrary) => {
 
   if (isDevelopment) {
     const jsPath = options.isLibrary ? playgroundJsPath : mainJsPath
-    const webpackHmr = `webpack-hot-middleware/client?path=http://localhost:${options.hotReloadPort}/__webpack_hmr`
+    const webpackHmr = require.resolve('react-dev-utils/webpackHotDevClient')
     return {
       [appName]: [webpackHmr, polyfills, jsPath],
     }

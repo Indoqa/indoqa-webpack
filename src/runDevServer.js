@@ -34,7 +34,7 @@ const runDevServer = (devServerConfig) => {
   }
 
   app.use('*', proxy(`http://localhost:${options.devPort}`, {
-    forwardPath: () => '/',
+    proxyReqPathResolver: () => '/',
   }))
 
   app.listen(options.hotReloadPort, () => {

@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 const createPlugins = (options, isDevelopment, isLibrary) => {
   const definePlugin = new webpack.DefinePlugin({
@@ -30,17 +31,15 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
 
   if (options.uglify) {
     compilePlugins.push(
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          screw_ie8: true,
-          warnings: false,
-        },
-        mangle: {
-          screw_ie8: true,
-        },
-        output: {
-          comments: false,
-          screw_ie8: true,
+      new UglifyJSPlugin({
+        sourceMap: options.createSourceMap,
+        parallel: true,
+        cache: true,
+        uglifyOptions: {
+          output: {
+            comments: false,
+            ascii_only: true,
+          },
         },
       })
     )

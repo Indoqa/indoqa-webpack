@@ -1,8 +1,8 @@
 const addDevelopmentOptions = (config, options, isDevelopment) => {
   if (isDevelopment) {
     const developmentOptions = {
-      devPort: options.devPort,
-      hotPort: options.hotReloadPort,
+      // devPort: options.devPort,
+      // hotPort: options.hotReloadPort,
       devtool: options.createSourceMap ? 'cheap-module-source-map' : false,
     }
     return Object.assign({}, config, developmentOptions)

@@ -1,8 +1,6 @@
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
-
 const createOutput = require('./config/output.js')
 // const createLoaders = require('./config/loaders.js')
-// const createPlugins = require('./config/plugins.js')
+const createPlugins = require('./config/plugins.js')
 const createRules = require('./config/rules.js')
 const createEntry = require('./config/entry.js')
 // const createPostCSS = require('./config/postcss.js')
@@ -19,19 +17,7 @@ const createConfig = options => {
     module: {
       rules: createRules(options, isDevelopment),
     },
-    plugins: [
-      new UglifyJSPlugin({
-        sourceMap: options.createSourceMap,
-        parallel: true,
-        cache: true,
-        uglifyOptions: {
-          output: {
-            comments: false,
-            ascii_only: true,
-          },
-        },
-      }),
-    ],
+    plugins: createPlugins(options, isDevelopment, isLibrary),
   }
 
   config = addExternals(config, options, isDevelopment, isLibrary)
