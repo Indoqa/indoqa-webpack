@@ -11,7 +11,22 @@ const createInlineableResourcesRule = options => {
   }
 }
 
-const createJavascriptRule = () => {
+const createJavascriptRuleProd = () => {
+  return {
+    test: /\.js$/,
+    exclude: /(node_modules)/,
+    use: {
+      loader: 'babel-loader',
+      options: {
+        babelrc: false,
+        presets: [require.resolve('babel-preset-react-app')],
+        cacheDirectory: true,
+      },
+    },
+  }
+}
+
+const createJavascriptRuleDev = () => {
   return {
     test: /\.js$/,
     exclude: /(node_modules)/,
@@ -94,7 +109,7 @@ const createRules = (options, isDevelopment) => {
     {
       oneOf: [
         createInlineableResourcesRule(options),
-        createJavascriptRule(),
+        isDevelopment ? createJavascriptRuleDev() : createJavascriptRuleProd(),
         createCssRule(options),
         createFallbackRule(options),
         // ** STOP ** Are you adding a new loader?

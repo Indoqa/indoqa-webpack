@@ -20,17 +20,13 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
   })
 
   const hotRunPlugins = [
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ]
 
   const extractTextProdPlugin = new ExtractTextPlugin(`${options.appName}-[hash].css`, {allChunks: true})
   const extractTextLibraryPlugin = new ExtractTextPlugin(`${options.appName}.css`, {allChunks: true})
 
-  const compilePlugins = [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-  ]
+  const compilePlugins = []
 
   if (options.uglify) {
     compilePlugins.push(
