@@ -50,7 +50,7 @@ const runDevServer = devServerConfig => {
   } = devServerConfig
 
   if (customRoutesCallback) {
-    console.log(chalk.red(`The config value 'routesCallback' is not supported any more.`))
+    console.log(chalk.red(`The config value 'routesCallback' is not supported any more. Configure the proxy in package.json.`))
     process.exit(0)
   }
 
