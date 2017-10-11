@@ -1,24 +1,52 @@
 /* eslint-disable no-console */
-const webpackDevMiddleware = require('webpack-dev-middleware')
-const webpackHotMiddleware = require('webpack-hot-middleware')
+const WebpackDevServer = require('webpack-dev-server')
 const webpack = require('webpack')
 const chalk = require('chalk')
-const express = require('express')
-const proxy = require('express-http-proxy')
 
 const createConfig = require('./createConfig.js')
 const createOptions = require('./createOptions.js')
 const version = require('../package.json').version
 const name = require('../package.json').name
 
-const runDevServer = (devServerConfig) => {
+const runDevServer = devServerConfig => {
+  process.env.BABEL_ENV = 'development'
   process.env.NODE_ENV = 'development'
 
-  const {options: customOptions, routesCallback: customRoutesCallback} = devServerConfig
+  // Makes the script crash on unhandled rejections instead of silently
+  // ignoring them. In the future, promise rejections that are not handled will
+  // terminate the Node.js process with a non-zero exit code.
+  process.on('unhandledRejection', err => {
+    throw err
+  })
+
+  const {
+    options: customOptions,
+    routesCallback: customRoutesCallback,
+  } = devServerConfig
   const options = createOptions(customOptions)
   const config = createConfig(options)
   const compiler = webpack(config)
 
+  const HOST = process.env.HOST || '0.0.0.0'
+
+  const devServer = new WebpackDevServer(compiler, serverConfig)
+  // Launch WebpackDevServer.
+  devServer
+    .listen(options.devPort, HOST, err => {
+      if (err) {
+        return console.log(err)
+      }
+
+      console.log(chalk.green(`${name} v${version} started a dev-server at port ${options.devPort}.`))
+    })
+    [('SIGINT', 'SIGTERM')].forEach(function(sig) {
+      process.on(sig, function() {
+        devServer.close()
+        process.exit()
+      })
+    })
+
+  /*
   const app = express()
 
   app.use(webpackDevMiddleware(compiler, {
@@ -48,7 +76,7 @@ const runDevServer = (devServerConfig) => {
       console.info(chalk.green(`Listening on port ${options.devPort}.`)
       )
     }
-  })
+  })*/
 }
 
 module.exports = exports = runDevServer
