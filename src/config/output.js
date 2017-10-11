@@ -22,8 +22,12 @@ const createOutput = (options, isDevelopment, isLibrary) => {
   return {
     path: path.join(process.cwd(), options.outputPath),
     filename: '[name]-[hash].js',
-    chunkFilename: '[name]-[chunkhash].js',
+    chunkFilename: '[name]-[chunkhash:8].chunk.js',
     publicPath: options.outputPublicPath,
+    devtoolModuleFilenameTemplate: info =>
+      path
+        .relative(options.outputPath, info.absoluteResourcePath)
+        .replace(/\\/g, '/'),
   }
 }
 
