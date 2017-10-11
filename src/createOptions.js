@@ -9,16 +9,9 @@ const DEFAULT_OPTIONS = {
 
   devPort: 3000,
   hotReloadPort: 3001,
-  devtool: 'cheap-eval-source-map',
   uglify: true,
   createSourceMap: true,
   createIndexHtml: false,
-  // babelLoaderProdPlugins: [
-  //   'transform-react-constant-elements',
-  //   // 'transform-react-inline-elements',
-  //   // 'transform-react-remove-prop-types',
-  //   // 'transform-react-pure-class-to-function',
-  // ],
   autoprefixerBrowser: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 11'],
 
   isLibrary: false,

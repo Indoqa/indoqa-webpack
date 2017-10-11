@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin')
 
 const createPlugins = (options, isDevelopment, isLibrary) => {
   const definePlugin = new webpack.DefinePlugin({
@@ -20,15 +21,16 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
     template: path.join(__dirname, 'index.html'),
   })
 
-  const hotRunPlugins = [
-    new webpack.HotModuleReplacementPlugin()
-  ]
-
-  const extractTextProdPlugin = new ExtractTextPlugin(`${options.appName}-[hash].css`, {allChunks: true})
-  const extractTextLibraryPlugin = new ExtractTextPlugin(`${options.appName}.css`, {allChunks: true})
+  const extractTextProdPlugin = new ExtractTextPlugin(
+    `${options.appName}-[hash].css`,
+    {allChunks: true}
+  )
+  const extractTextLibraryPlugin = new ExtractTextPlugin(
+    `${options.appName}.css`,
+    {allChunks: true}
+  )
 
   const compilePlugins = []
-
   if (options.uglify) {
     compilePlugins.push(
       new UglifyJSPlugin({
@@ -45,6 +47,11 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
     )
   }
 
+  const ignoreMomentJsLocaleResourcesPlugin = new webpack.IgnorePlugin(
+    /^\.\/locale$/,
+    /moment$/
+  )
+
   if (options.createSourceMap) {
     compilePlugins.push(
       new webpack.SourceMapDevToolPlugin({
@@ -54,18 +61,40 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
   }
 
   if (isLibrary && !isDevelopment) {
-    return [extractTextLibraryPlugin, ...compilePlugins]
+    return [
+      extractTextLibraryPlugin,
+      ...compilePlugins,
+      ignoreMomentJsLocaleResourcesPlugin,
+    ]
   }
 
   if (isDevelopment) {
-    return [definePlugin, createIndexHTMLPlugin, ...hotRunPlugins]
+    return [
+      definePlugin,
+      createIndexHTMLPlugin,
+      new webpack.NamedModulesPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+      new WatchMissingNodeModulesPlugin(),
+      ignoreMomentJsLocaleResourcesPlugin,
+    ]
   }
 
   if (options.createIndexHtml) {
-    return [definePlugin, extractTextProdPlugin, createIndexHTMLPlugin, ...compilePlugins]
+    return [
+      definePlugin,
+      extractTextProdPlugin,
+      createIndexHTMLPlugin,
+      ...compilePlugins,
+      ignoreMomentJsLocaleResourcesPlugin,
+    ]
   }
 
-  return [definePlugin, extractTextProdPlugin, ...compilePlugins]
+  return [
+    definePlugin,
+    extractTextProdPlugin,
+    ...compilePlugins,
+    ignoreMomentJsLocaleResourcesPlugin,
+  ]
 }
 
 module.exports = exports = createPlugins

@@ -34,7 +34,7 @@ const createJavascriptRuleDev = () => {
       loader: 'babel-loader',
       options: {
         babelrc: false,
-        presets: [require.resolve('babel-preset-react-app')],
+        presets: [require.resolve('babel-preset-react-app'), 'react-hmre'],
         compact: true,
       },
     },
