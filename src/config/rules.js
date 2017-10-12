@@ -7,7 +7,7 @@ const createInlineableResourcesRule = options => {
     loader: require.resolve('url-loader'),
     options: {
       limit: 10000,
-      name: options.outputPath + '[name].[hash:8].[ext]',
+      name: 'res/' + '[name].[hash:8].[ext]',
     },
   }
 }
@@ -112,7 +112,7 @@ const createFallbackRule = options => {
     loader: require.resolve('file-loader'),
     exclude: [/\.js$/, /\.html$/, /\.json$/],
     options: {
-      name: options.outputPath + '[name].[hash:8].[ext]',
+      name: 'res/' + '[name].[hash:8].[ext]',
     },
   }
 }
