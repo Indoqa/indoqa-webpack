@@ -47,6 +47,7 @@ const printFileSizes = (buildDir, stats) => {
 }
 
 const build = (projectOptions) => {
+  process.env.BABEL_ENV = 'production'
   process.env.NODE_ENV = 'production'
   console.log(`${name} v${version} is creating an optimized production build...`)
 

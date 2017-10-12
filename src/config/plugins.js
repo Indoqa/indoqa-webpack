@@ -72,6 +72,7 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
     return [
       definePlugin,
       createIndexHTMLPlugin,
+      extractTextProdPlugin,
       new webpack.NamedModulesPlugin(),
       new webpack.HotModuleReplacementPlugin(),
       new WatchMissingNodeModulesPlugin(),

@@ -31,9 +31,9 @@ const createServerConfig = proxy => {
 }
 
 const getAppPackageJson = () => {
-  const appDirectory = fs.realpathSync(process.cwd());
-  const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
-  return resolveApp('package.json')
+  const appDirectory = fs.realpathSync(process.cwd())
+  const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
+  return require(resolveApp('package.json'))
 }
 
 const runDevServer = devServerConfig => {
@@ -44,20 +44,27 @@ const runDevServer = devServerConfig => {
     throw err
   })
 
+  console.log(`${NAME} v${VERSION} is going to start a development server ...`)
+
   const {
     options: customOptions,
     routesCallback: customRoutesCallback,
   } = devServerConfig
 
   if (customRoutesCallback) {
-    console.log(chalk.red(`The config value 'routesCallback' is not supported any more. Configure the proxy in package.json.`))
-    process.exit(0)
+    console.log(
+      chalk.red(
+        `The config value 'routesCallback' is not supported any more. Configure the proxy in package.json.`
+      )
+    )
+    process.exit(1)
   }
 
   const options = createOptions(customOptions)
   const config = createConfig(options)
   const compiler = webpack(config)
-  const proxy = require(getAppPackageJson()).proxy;
+  const appPackageJson = getAppPackageJson()
+  const proxy = appPackageJson.proxy
 
   const devServer = new WebpackDevServer(compiler, createServerConfig(proxy))
   devServer.listen(options.devPort, HOST, err => {
@@ -66,7 +73,9 @@ const runDevServer = devServerConfig => {
     }
 
     console.log(
-      chalk.green(`${NAME} v${VERSION} started at port ${options.devPort}.`)
+      chalk.green(
+        `${appPackageJson.name} v${appPackageJson.version} runs at port ${options.devPort}`
+      )
     )
   })
 }

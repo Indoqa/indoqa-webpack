@@ -1,4 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const autoprefixer = require('autoprefixer');
 
 const createInlineableResourcesRule = options => {
   return {
@@ -11,7 +12,22 @@ const createInlineableResourcesRule = options => {
   }
 }
 
-const createJavascriptRuleProd = () => {
+const createJavascriptRule = isDevelopment => {
+  if (isDevelopment) {
+    return {
+      test: /\.js$/,
+      exclude: /(node_modules)/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          babelrc: false,
+          presets: [require.resolve('babel-preset-react-app'), 'react-hmre'],
+          compact: true,
+        },
+      },
+    }
+  }
+
   return {
     test: /\.js$/,
     exclude: /(node_modules)/,
@@ -26,26 +42,11 @@ const createJavascriptRuleProd = () => {
   }
 }
 
-const createJavascriptRuleDev = () => {
-  return {
-    test: /\.js$/,
-    exclude: /(node_modules)/,
-    use: {
-      loader: 'babel-loader',
-      options: {
-        babelrc: false,
-        presets: [require.resolve('babel-preset-react-app'), 'react-hmre'],
-        compact: true,
-      },
-    },
-  }
-}
-
-const createStyleLoader = () => {
+const createStyleLoader = isDevelopment => {
   return {
     loader: require.resolve('style-loader'),
     options: {
-      hmr: false,
+      hmr: isDevelopment,
     },
   }
 }
@@ -69,24 +70,46 @@ const createPostCssLoader = options => {
       // https://github.com/facebookincubator/create-react-app/issues/2677
       ident: 'postcss',
       plugins: () => [
-        require('postcss-flexbugs-fixes'),
+        // require('postcss-flexbugs-fixes'),
         autoprefixer({
           browsers: options.autoprefixerBrowser,
           flexbox: 'no-2009',
         }),
       ],
+      sourceMap: options.createSourceMap,
     },
   }
 }
 
-const createCssRule = options => {
+const createCssRule = (options, isDevelopment) => {
   return {
     test: /\.css$/,
     loader: ExtractTextPlugin.extract(
       Object.assign(
         {
-          fallback: createStyleLoader(),
+          fallback: createStyleLoader(isDevelopment),
           use: [createCssLoader(options), createPostCssLoader(options)],
+        },
+        {}
+      )
+    ),
+  }
+}
+
+const createStylusRule = (options, isDevelopment) => {
+  return {
+    test: /\.styl$/,
+    loader: ExtractTextPlugin.extract(
+      Object.assign(
+        {
+          fallback: createStyleLoader(isDevelopment),
+          use: [
+            createCssLoader(options),
+            createPostCssLoader(options),
+            {
+              loader: require.resolve('stylus-loader')
+            },
+          ],
         },
         {}
       )
@@ -109,8 +132,9 @@ const createRules = (options, isDevelopment) => {
     {
       oneOf: [
         createInlineableResourcesRule(options),
-        isDevelopment ? createJavascriptRuleDev() : createJavascriptRuleProd(),
+        createJavascriptRule(isDevelopment),
         createCssRule(options),
+        createStylusRule(options),
         createFallbackRule(options),
         // ** STOP ** Are you adding a new loader?
         // Make sure to add the new loader(s) before the "file" loader.
