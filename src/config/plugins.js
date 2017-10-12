@@ -21,7 +21,7 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
     template: path.join(__dirname, 'index.html'),
   })
 
-  const extractTextProdPlugin = new ExtractTextPlugin(
+  const extractTextPlugin = new ExtractTextPlugin(
     `${options.appName}-[hash].css`,
     {allChunks: true}
   )
@@ -72,7 +72,7 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
     return [
       definePlugin,
       createIndexHTMLPlugin,
-      extractTextProdPlugin,
+      extractTextPlugin,
       new webpack.NamedModulesPlugin(),
       new webpack.HotModuleReplacementPlugin(),
       new WatchMissingNodeModulesPlugin(),
@@ -83,7 +83,7 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
   if (options.createIndexHtml) {
     return [
       definePlugin,
-      extractTextProdPlugin,
+      extractTextPlugin,
       createIndexHTMLPlugin,
       ...compilePlugins,
       ignoreMomentJsLocaleResourcesPlugin,
@@ -92,7 +92,7 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
 
   return [
     definePlugin,
-    extractTextProdPlugin,
+    extractTextPlugin,
     ...compilePlugins,
     ignoreMomentJsLocaleResourcesPlugin,
   ]

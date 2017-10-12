@@ -1,5 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const autoprefixer = require('autoprefixer');
+const autoprefixer = require('autoprefixer')
 
 const createInlineableResourcesRule = options => {
   return {
@@ -84,36 +84,26 @@ const createPostCssLoader = options => {
 const createCssRule = (options, isDevelopment) => {
   return {
     test: /\.css$/,
-    loader: ExtractTextPlugin.extract(
-      Object.assign(
-        {
-          fallback: createStyleLoader(isDevelopment),
-          use: [createCssLoader(options), createPostCssLoader(options)],
-        },
-        {}
-      )
-    ),
+    loader: ExtractTextPlugin.extract({
+      fallback: createStyleLoader(isDevelopment),
+      use: [createCssLoader(options), createPostCssLoader(options)],
+    }),
   }
 }
 
 const createStylusRule = (options, isDevelopment) => {
   return {
     test: /\.styl$/,
-    loader: ExtractTextPlugin.extract(
-      Object.assign(
+    loader: ExtractTextPlugin.extract({
+      fallback: createStyleLoader(isDevelopment),
+      use: [
+        createCssLoader(options),
+        createPostCssLoader(options),
         {
-          fallback: createStyleLoader(isDevelopment),
-          use: [
-            createCssLoader(options),
-            createPostCssLoader(options),
-            {
-              loader: require.resolve('stylus-loader')
-            },
-          ],
+          loader: require.resolve('stylus-loader'),
         },
-        {}
-      )
-    ),
+      ],
+    }),
   }
 }
 
