@@ -18,7 +18,8 @@
   "bin": {
     "indoqa-webpack": "./bin/indoqa-webpack.js",
     "indoqa-eslint": "./bin/indoqa-eslint.js",
-    "indoqa-jest": "./bin/indoqa-jest.js"
+    "indoqa-jest": "./bin/indoqa-jest.js",
+    "indoqa-dev-server": "./bin/indoqa-dev-server.js"
   },
   "dependencies": {
     "autoprefixer": "^7.1.5",
