@@ -36,7 +36,7 @@ const getAppPackageJson = () => {
   return require(resolveApp('package.json'))
 }
 
-const runDevServer = devServerConfig => {
+const runDevServer = customOptions => {
   process.env.BABEL_ENV = 'development'
   process.env.NODE_ENV = 'development'
 
@@ -45,20 +45,6 @@ const runDevServer = devServerConfig => {
   })
 
   console.log(`${NAME} v${VERSION} is going to start a development server ...`)
-
-  const {
-    options: customOptions,
-    routesCallback: customRoutesCallback,
-  } = devServerConfig
-
-  if (customRoutesCallback) {
-    console.log(
-      chalk.red(
-        `The config value 'routesCallback' is not supported any more. Configure the proxy in package.json.`
-      )
-    )
-    process.exit(1)
-  }
 
   const options = createOptions(customOptions)
   const config = createConfig(options)
