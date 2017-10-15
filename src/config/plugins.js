@@ -47,11 +47,6 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
     )
   }
 
-  const ignoreMomentJsLocaleResourcesPlugin = new webpack.IgnorePlugin(
-    /^\.\/locale$/,
-    /moment$/
-  )
-
   if (options.createSourceMap) {
     compilePlugins.push(
       new webpack.SourceMapDevToolPlugin({
@@ -59,6 +54,12 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
       })
     )
   }
+
+  const ignoreMomentJsLocaleResourcesPlugin = new webpack.IgnorePlugin(
+    /^\.\/locale$/,
+    /moment$/
+  )
+  compilePlugins.push(ignoreMomentJsLocaleResourcesPlugin)
 
   if (isLibrary && !isDevelopment) {
     return [
@@ -86,7 +87,6 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
       extractTextPlugin,
       createIndexHTMLPlugin,
       ...compilePlugins,
-      ignoreMomentJsLocaleResourcesPlugin,
     ]
   }
 
@@ -94,7 +94,6 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
     definePlugin,
     extractTextPlugin,
     ...compilePlugins,
-    ignoreMomentJsLocaleResourcesPlugin,
   ]
 }
 
