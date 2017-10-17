@@ -18,6 +18,7 @@ const createServerConfig = proxy => {
   return {
     compress: true,
     clientLogLevel: 'none',
+    historyApiFallback: true,
     hot: true,
     publicPath: '/',
     quiet: true,
