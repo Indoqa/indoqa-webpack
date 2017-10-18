@@ -1,7 +1,7 @@
 const addDevelopmentOptions = (config, options, isDevelopment) => {
   if (isDevelopment) {
     const developmentOptions = {
-      devtool: options.createSourceMap ? 'cheap-module-source-map' : false,
+      devtool: options.createSourceMap ? 'eval-source-map' : false,
     }
     return Object.assign({}, config, developmentOptions)
   }
