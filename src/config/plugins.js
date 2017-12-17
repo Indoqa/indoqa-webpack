@@ -63,6 +63,7 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
 
   if (isLibrary && !isDevelopment) {
     return [
+      definePlugin,
       extractTextLibraryPlugin,
       ...compilePlugins,
       ignoreMomentJsLocaleResourcesPlugin,
