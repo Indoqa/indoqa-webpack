@@ -23,7 +23,8 @@ const createJavascriptRule = (isDevelopment) => {
           babelrc: false,
           presets: [require.resolve('babel-preset-react-app'), 'react-hmre'],
           plugins: [
-            require.resolve('babel-plugin-transform-react-constant-elements')
+            require.resolve('babel-plugin-transform-react-constant-elements'),
+            require.resolve('babel-plugin-transform-react-fela-display-name')
           ],
           compact: true,
         },
@@ -40,7 +41,8 @@ const createJavascriptRule = (isDevelopment) => {
         babelrc: false,
         presets: [require.resolve('babel-preset-react-app')],
         plugins: [
-          require.resolve('babel-plugin-transform-react-constant-elements')
+          require.resolve('babel-plugin-transform-react-constant-elements'),
+          require.resolve('babel-plugin-transform-react-fela-display-name')
         ],
         cacheDirectory: true,
       },
