@@ -1,7 +1,7 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 
-const createInlineableResourcesRule = options => {
+const createInlineableResourcesRule = () => {
   return {
     test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
     loader: require.resolve('url-loader'),
@@ -12,7 +12,7 @@ const createInlineableResourcesRule = options => {
   }
 }
 
-const createJavascriptRule = isDevelopment => {
+const createJavascriptRule = (isDevelopment) => {
   if (isDevelopment) {
     return {
       test: /\.js$/,
@@ -22,6 +22,9 @@ const createJavascriptRule = isDevelopment => {
         options: {
           babelrc: false,
           presets: [require.resolve('babel-preset-react-app'), 'react-hmre'],
+          plugins: [
+            require.resolve('babel-plugin-transform-react-constant-elements')
+          ],
           compact: true,
         },
       },
@@ -36,13 +39,16 @@ const createJavascriptRule = isDevelopment => {
       options: {
         babelrc: false,
         presets: [require.resolve('babel-preset-react-app')],
+        plugins: [
+          require.resolve('babel-plugin-transform-react-constant-elements')
+        ],
         cacheDirectory: true,
       },
     },
   }
 }
 
-const createStyleLoader = isDevelopment => {
+const createStyleLoader = (isDevelopment) => {
   return {
     loader: require.resolve('style-loader'),
     options: {
@@ -51,7 +57,7 @@ const createStyleLoader = isDevelopment => {
   }
 }
 
-const createCssLoader = options => {
+const createCssLoader = (options) => {
   return {
     loader: require.resolve('css-loader'),
     options: {
@@ -62,7 +68,7 @@ const createCssLoader = options => {
   }
 }
 
-const createPostCssLoader = options => {
+const createPostCssLoader = (options) => {
   return {
     loader: require.resolve('postcss-loader'),
     options: {
@@ -107,7 +113,7 @@ const createStylusRule = (options, isDevelopment) => {
   }
 }
 
-const createFallbackRule = options => {
+const createFallbackRule = (options) => {
   return {
     loader: require.resolve('file-loader'),
     exclude: [/\.js$/, /\.html$/, /\.json$/],

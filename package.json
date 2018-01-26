@@ -1,6 +1,6 @@
 {
   "name": "indoqa-webpack",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Simplified, opinionated usage of Webpack as build tool and dev-server",
   "main": "src/index.js",
   "author": "Indoqa Software Design und Beratung GmbH (https://www.indoqa.com)",
@@ -67,5 +67,8 @@
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.4",
     "whatwg-fetch": "^2.0.3"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-react-fela-display-name": "^1.0.9"
   }
 }
