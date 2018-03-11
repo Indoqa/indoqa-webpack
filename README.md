@@ -44,6 +44,6 @@ TBD (usage, ref to sample)
 
 ## Todos
 
- * Webpack 2 support
+ * Webpack 4 support
  * preset env
- * cache-loader
+ * [Error Overlay Webpack Plugin](https://github.com/smooth-code/error-overlay-webpack-plugin/blob/master/README.md)
