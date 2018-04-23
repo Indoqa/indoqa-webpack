@@ -44,6 +44,7 @@ TBD (usage, ref to sample)
 
 ## Todos
 
- * Webpack 4 support
+ * Webpack 4 support (see [CreateReactApp - Webpack 4 upgrade](https://github.com/facebook/create-react-app/pull/4077))
  * preset env
  * [Error Overlay Webpack Plugin](https://github.com/smooth-code/error-overlay-webpack-plugin/blob/master/README.md)
+ * Optimize debugging experience
