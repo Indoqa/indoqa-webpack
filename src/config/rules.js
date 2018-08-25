@@ -23,8 +23,7 @@ const createJavascriptRule = (isDevelopment) => {
           babelrc: false,
           presets: [require.resolve('babel-preset-react-app'), 'react-hmre'],
           plugins: [
-            require.resolve('babel-plugin-transform-react-constant-elements'),
-            require.resolve('babel-plugin-transform-react-fela-display-name')
+            require.resolve('babel-plugin-transform-react-constant-elements')
           ],
           compact: true,
         },
