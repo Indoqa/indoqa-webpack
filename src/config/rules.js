@@ -137,7 +137,6 @@ const createRules = (options, isDevelopment) => {
         createInlineableResourcesRule(options),
         createJavascriptRule(isDevelopment),
         createTypescriptRule(),
-        createStyleLoader(),
         // createCssRule(options),
         // createStylusRule(options),
         createFallbackRule(options),
