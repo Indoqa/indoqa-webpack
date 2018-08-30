@@ -48,6 +48,13 @@ const createJavascriptRule = (isDevelopment) => {
   }
 }
 
+const createTypescriptRule = () => {
+  return {
+    test: /\.tsx?$/,
+    loader: 'awesome-typescript-loader',
+  }
+}
+
 const createStyleLoader = (isDevelopment) => {
   return {
     loader: require.resolve('style-loader'),
@@ -129,6 +136,7 @@ const createRules = (options, isDevelopment) => {
       oneOf: [
         createInlineableResourcesRule(options),
         createJavascriptRule(isDevelopment),
+        createStyleLoader(),
         // createCssRule(options),
         // createStylusRule(options),
         createFallbackRule(options),

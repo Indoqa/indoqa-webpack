@@ -11,6 +11,9 @@ const createConfig = options => {
 
   let config = {
     mode: isDevelopment ? "development" : "production",
+    resolve: {
+      extensions: ['.ts', '.tsx', '.js', '.jsx']
+    },
     entry: createEntry(options, isDevelopment, isLibrary),
     output: createOutput(options, isDevelopment, isLibrary),
     module: {
