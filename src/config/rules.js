@@ -1,4 +1,4 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+// const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 
 const createInlineableResourcesRule = () => {
@@ -129,8 +129,8 @@ const createRules = (options, isDevelopment) => {
       oneOf: [
         createInlineableResourcesRule(options),
         createJavascriptRule(isDevelopment),
-        createCssRule(options),
-        createStylusRule(options),
+        // createCssRule(options),
+        // createStylusRule(options),
         createFallbackRule(options),
         // ** STOP ** Are you adding a new loader?
         // Make sure to add the new loader(s) before the "file" loader.

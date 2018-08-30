@@ -10,6 +10,7 @@ const createConfig = options => {
   const isLibrary = options.isLibrary
 
   let config = {
+    mode: isDevelopment ? "development" : "production",
     entry: createEntry(options, isDevelopment, isLibrary),
     output: createOutput(options, isDevelopment, isLibrary),
     module: {
