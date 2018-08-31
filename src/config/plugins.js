@@ -95,6 +95,7 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
   }
 
   return [
+    
     definePlugin,
     // extractTextPlugin,
     ...compilePlugins,

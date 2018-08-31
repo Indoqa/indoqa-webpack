@@ -51,7 +51,15 @@ const createJavascriptRule = (isDevelopment) => {
 const createTypescriptRule = () => {
   return {
     test: /\.tsx?$/,
-    loader: 'awesome-typescript-loader',
+    exclude: /node_modules/,
+    use: {
+      loader: 'ts-loader',
+      options: {
+        transpileOnly: true,
+        configFile: path.join(process.cwd(), 'tsconfig.json'),
+        logLevel: 'info',
+      }
+    }
   }
 }
 
@@ -134,8 +142,8 @@ const createRules = (options, isDevelopment) => {
   return [
     {
       oneOf: [
-        createInlineableResourcesRule(options),
-        createJavascriptRule(isDevelopment),
+        // createInlineableResourcesRule(options),
+        // createJavascriptRule(isDevelopment),
         createTypescriptRule(),
         // createCssRule(options),
         // createStylusRule(options),
