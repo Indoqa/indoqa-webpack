@@ -9,4 +9,4 @@ const addDevelopmentOptions = (config, options, isDevelopment) => {
   return config
 }
 
-module.exports = exports = addDevelopmentOptions
+module.exports = addDevelopmentOptions

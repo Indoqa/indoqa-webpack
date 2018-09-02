@@ -1,6 +1,3 @@
-// const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const autoprefixer = require('autoprefixer')
-
 const createInlineableResourcesRule = () => {
   return {
     test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -62,77 +59,12 @@ const createTypescriptRule = (options) => {
   }
 }
 
-const createStyleLoader = (isDevelopment) => {
-  return {
-    loader: require.resolve('style-loader'),
-    options: {
-      hmr: isDevelopment,
-    },
-  }
-}
-
-const createCssLoader = (options) => {
-  return {
-    loader: require.resolve('css-loader'),
-    options: {
-      importLoaders: 1,
-      minimize: true,
-      sourceMap: options.createSourceMap,
-    },
-  }
-}
-
-const createPostCssLoader = (options) => {
-  return {
-    loader: require.resolve('postcss-loader'),
-    options: {
-      // Necessary for external CSS imports to work
-      // https://github.com/facebookincubator/create-react-app/issues/2677
-      ident: 'postcss',
-      plugins: () => [
-        // require('postcss-flexbugs-fixes'),
-        autoprefixer({
-          browsers: options.autoprefixerBrowser,
-          flexbox: 'no-2009',
-        }),
-      ],
-      sourceMap: options.createSourceMap,
-    },
-  }
-}
-
-const createCssRule = (options, isDevelopment) => {
-  return {
-    test: /\.css$/,
-    loader: ExtractTextPlugin.extract({
-      fallback: createStyleLoader(isDevelopment),
-      use: [createCssLoader(options), createPostCssLoader(options)],
-    }),
-  }
-}
-
-const createStylusRule = (options, isDevelopment) => {
-  return {
-    test: /\.styl$/,
-    loader: ExtractTextPlugin.extract({
-      fallback: createStyleLoader(isDevelopment),
-      use: [
-        createCssLoader(options),
-        createPostCssLoader(options),
-        {
-          loader: require.resolve('stylus-loader'),
-        },
-      ],
-    }),
-  }
-}
-
-const createFallbackRule = (options) => {
+const createFallbackRule = () => {
   return {
     loader: require.resolve('file-loader'),
     exclude: [/\.js$/, /\.html$/, /\.json$/],
     options: {
-      name: 'res/' + '[name].[hash:8].[ext]',
+      name: 'res/[name].[hash:8].[ext]',
     },
   }
 }
@@ -141,12 +73,12 @@ const createRules = (options, isDevelopment) => {
   return [
     {
       oneOf: [
-        // createInlineableResourcesRule(options),
+        createInlineableResourcesRule(options),
         createJavascriptRule(isDevelopment),
         createTypescriptRule(options),
         // createCssRule(options),
         // createStylusRule(options),
-        createFallbackRule(options),
+        createFallbackRule(),
         // ** STOP ** Are you adding a new loader?
         // Make sure to add the new loader(s) before the "file" loader.
       ],
@@ -154,4 +86,4 @@ const createRules = (options, isDevelopment) => {
   ]
 }
 
-module.exports = exports = createRules
+module.exports = createRules

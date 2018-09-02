@@ -44,4 +44,4 @@ const createOptions = (userOptions) => {
   return options
 }
 
-module.exports = exports = createOptions
+module.exports = createOptions

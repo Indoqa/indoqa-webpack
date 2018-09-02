@@ -9,6 +9,7 @@ const chalk = require('chalk')
 
 const VERSION = require('../package.json').version
 const NAME = require('../package.json').name
+
 const HOST = process.env.HOST || '0.0.0.0'
 
 const createConfig = require('./createConfig.js')
@@ -67,4 +68,4 @@ const runDevServer = customOptions => {
   })
 }
 
-module.exports = exports = runDevServer
+module.exports = runDevServer

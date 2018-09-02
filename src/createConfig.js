@@ -28,4 +28,4 @@ const createConfig = options => {
   return config
 }
 
-module.exports = exports = createConfig
+module.exports = createConfig

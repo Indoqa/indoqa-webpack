@@ -31,4 +31,4 @@ const createOutput = (options, isDevelopment, isLibrary) => {
   }
 }
 
-module.exports = exports = createOutput
+module.exports = createOutput

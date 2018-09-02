@@ -24,4 +24,4 @@ const createEntry = (options, isDevelopment, isLibrary) => {
   }
 }
 
-module.exports = exports = createEntry
+module.exports = createEntry

@@ -11,4 +11,4 @@ const addExternals = (config, options, isDevelopment, isLibrary) => {
   return config
 }
 
-module.exports = exports = addExternals
+module.exports = addExternals

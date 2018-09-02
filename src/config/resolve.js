@@ -15,4 +15,4 @@ const createResolve = (options) => {
   }
 }
 
-module.exports = exports = createResolve
+module.exports = createResolve
