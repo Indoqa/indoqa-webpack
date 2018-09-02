@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
 
 const createPlugins = (options, isDevelopment, isLibrary) => {
   const definePlugin = new webpack.DefinePlugin({
@@ -33,11 +34,17 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
   )
   compilePlugins.push(ignoreMomentJsLocaleResourcesPlugin)
 
-  if (isLibrary && !isDevelopment) {
+  const manifestPlugin = new ManifestPlugin({
+    fileName: 'asset-manifest.json',
+    publicPath: options.outputPublicPath,
+  })
+  compilePlugins.push(manifestPlugin)
+
+  if
+  (isLibrary && !isDevelopment) {
     return [
       definePlugin,
-      ...compilePlugins,
-      ignoreMomentJsLocaleResourcesPlugin,
+      ...compilePlugins
     ]
   }
 
@@ -48,6 +55,7 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
       new webpack.NamedModulesPlugin(),
       new webpack.HotModuleReplacementPlugin(),
       ignoreMomentJsLocaleResourcesPlugin,
+      manifestPlugin
     ]
   }
 
