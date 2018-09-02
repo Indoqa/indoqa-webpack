@@ -1,4 +1,3 @@
-const path = require('path')
 // const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 
@@ -8,7 +7,7 @@ const createInlineableResourcesRule = () => {
     loader: require.resolve('url-loader'),
     options: {
       limit: 10000,
-      name: 'res/' + '[name].[hash:8].[ext]',
+      name: 'res/[name].[hash:8].[ext]',
     },
   }
 }
@@ -49,7 +48,7 @@ const createJavascriptRule = (isDevelopment) => {
   }
 }
 
-const createTypescriptRule = () => {
+const createTypescriptRule = (options) => {
   return {
     test: /\.tsx?$/,
     exclude: /node_modules/,
@@ -57,10 +56,9 @@ const createTypescriptRule = () => {
       loader: 'ts-loader',
       options: {
         transpileOnly: true,
-        configFile: path.join(process.cwd(), 'tsconfig.json'),
-        logLevel: 'info',
-      }
-    }
+        configFile: options.tsconfigPath,
+      },
+    },
   }
 }
 
@@ -144,8 +142,8 @@ const createRules = (options, isDevelopment) => {
     {
       oneOf: [
         // createInlineableResourcesRule(options),
-        // createJavascriptRule(isDevelopment),
-        createTypescriptRule(),
+        createJavascriptRule(isDevelopment),
+        createTypescriptRule(options),
         // createCssRule(options),
         // createStylusRule(options),
         createFallbackRule(options),

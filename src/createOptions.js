@@ -1,3 +1,4 @@
+const path = require('path')
 const chalk = require('chalk')
 
 const DEFAULT_OPTIONS = {
@@ -35,6 +36,7 @@ const validate = options => {
 
 const createOptions = (userOptions) => {
   userOptions.isLibrary = userOptions.isLibrary || userOptions.isReactLibrary
+  userOptions.tsconfigPath = path.join(process.cwd(), 'tsconfig.json')
   const options = Object.assign({}, DEFAULT_OPTIONS, userOptions)
 
   validate(options)

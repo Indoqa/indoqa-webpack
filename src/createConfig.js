@@ -1,6 +1,4 @@
-const path = require('path')
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-
+const createResolve = require('./config/resolve.js')
 const createOutput = require('./config/output.js')
 const createPlugins = require('./config/plugins.js')
 const createRules = require('./config/rules.js')
@@ -14,12 +12,7 @@ const createConfig = options => {
 
   let config = {
     mode: isDevelopment ? 'development' : 'production',
-    resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.jsx'],
-      plugins: [new TsconfigPathsPlugin({
-        configFile: path.join(process.cwd(), 'tsconfig.json')
-      })]
-    },
+    resolve: createResolve(options),
     entry: createEntry(options, isDevelopment, isLibrary),
     output: createOutput(options, isDevelopment, isLibrary),
     module: {
