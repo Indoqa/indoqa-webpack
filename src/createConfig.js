@@ -5,6 +5,8 @@ const createRules = require('./config/rules.js')
 const createEntry = require('./config/entry.js')
 const addExternals = require('./config/externals.js')
 const addDevelopmentOptions = require('./config/developmentOptions.js')
+const addOptimizations = require('./config/optimizations.js')
+const addNode = require('./config/node.js')
 
 const createConfig = options => {
   const isDevelopment = process.env.NODE_ENV !== 'production'
@@ -23,6 +25,8 @@ const createConfig = options => {
 
   config = addExternals(config, options, isDevelopment, isLibrary)
   config = addDevelopmentOptions(config, options, isDevelopment)
+  config = addOptimizations(config, options, isDevelopment)
+  config = addNode(config, options, isDevelopment)
 
   // console.log('config=', JSON.stringify(config, null, 2))
   return config
