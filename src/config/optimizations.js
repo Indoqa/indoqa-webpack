@@ -5,22 +5,9 @@ const OPTIMIZATIONS = {
     minimizer: [
       new UglifyJsPlugin({
         uglifyOptions: {
-          parse: {
-            ecma: 8,
-          },
-          compress: {
-            ecma: 5,
-            warnings: false,
-            comparisons: false,
-          },
-          mangle: {
-            safari10: true,
-          },
-          output: {
-            ecma: 5,
-            comments: false,
-            ascii_only: true,
-          },
+          compress: true,
+          ecma: 6,
+          mangle: true,
         },
         parallel: true,
         cache: true,
