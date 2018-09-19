@@ -67,6 +67,13 @@ const build = (projectOptions) => {
       process.exit(1)
     }
 
+    const compileErrors = stats.toJson().errors
+    if (compileErrors) {
+      console.error('Failed to compile the project. Reason:')
+      console.error(compileErrors)
+      process.exit(1)
+    }
+
     console.log(chalk.green('Compiled successfully.'))
     console.log()
     console.log('File sizes:')
