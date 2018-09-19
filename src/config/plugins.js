@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const createPlugins = (options, isDevelopment, isLibrary) => {
   const definePlugin = new webpack.DefinePlugin({
@@ -34,6 +35,11 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
   )
   compilePlugins.push(ignoreMomentJsLocaleResourcesPlugin)
 
+  const extractCssPlugin = new MiniCssExtractPlugin({
+    filename: isDevelopment ? '[name].css' : `${options.appName}-[hash].css`,
+    chunkFilename: isDevelopment ? '[id].css' : `${options.appName}-[id]-[hash].css`,
+  })
+
   const manifestPlugin = new ManifestPlugin({
     fileName: 'asset-manifest.json',
     publicPath: options.outputPublicPath,
@@ -44,6 +50,7 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
   (isLibrary && !isDevelopment) {
     return [
       definePlugin,
+      extractCssPlugin,
       ...compilePlugins
     ]
   }
@@ -51,6 +58,7 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
   if (isDevelopment) {
     return [
       definePlugin,
+      extractCssPlugin,
       createIndexHTMLPlugin,
       new webpack.NamedModulesPlugin(),
       new webpack.HotModuleReplacementPlugin(),
@@ -62,6 +70,7 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
   if (options.createIndexHtml) {
     return [
       definePlugin,
+      extractCssPlugin,
       createIndexHTMLPlugin,
       ...compilePlugins,
     ]
@@ -69,6 +78,7 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
 
   return [
     definePlugin,
+    extractCssPlugin,
     ...compilePlugins,
   ]
 }

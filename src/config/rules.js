@@ -1,3 +1,6 @@
+const autoprefixer = require('autoprefixer')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
 const createInlineableResourcesRule = () => {
   return {
     test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -59,6 +62,36 @@ const createTypescriptRule = (options) => {
   }
 }
 
+const createPostCssLoader = (options) => {
+  return {
+    loader: require.resolve('postcss-loader'),
+    options: {
+      // Necessary for external CSS imports to work
+      // https://github.com/facebookincubator/create-react-app/issues/2677
+      ident: 'postcss',
+      plugins: () => [
+        // require('postcss-flexbugs-fixes'),
+        autoprefixer({
+          browsers: options.autoprefixerBrowser,
+          flexbox: 'no-2009',
+        }),
+      ],
+      sourceMap: options.createSourceMap,
+    },
+  }
+}
+
+const createCssRule = (options, isDevelopment) => {
+  return {
+    test: /\.css$/,
+    use: [
+      isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+      'css-loader',
+      createPostCssLoader(options),
+    ],
+  }
+}
+
 const createFallbackRule = () => {
   return {
     loader: require.resolve('file-loader'),
@@ -76,8 +109,7 @@ const createRules = (options, isDevelopment) => {
         createInlineableResourcesRule(options),
         createJavascriptRule(isDevelopment),
         createTypescriptRule(options),
-        // createCssRule(options),
-        // createStylusRule(options),
+        createCssRule(options, isDevelopment),
         createFallbackRule(),
         // ** STOP ** Are you adding a new loader?
         // Make sure to add the new loader(s) before the "file" loader.
