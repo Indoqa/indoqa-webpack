@@ -68,7 +68,7 @@ const build = (projectOptions) => {
     }
 
     const compileErrors = stats.toJson().errors
-    if (compileErrors) {
+    if (compileErrors !== null && compileErrors.length > 0) {
       console.error('Failed to compile the project. Reason:')
       console.error(compileErrors)
       process.exit(1)
