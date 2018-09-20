@@ -36,8 +36,8 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
   compilePlugins.push(ignoreMomentJsLocaleResourcesPlugin)
 
   const extractCssPlugin = new MiniCssExtractPlugin({
-    filename: isDevelopment ? '[name].css' : `${options.appName}-[hash].css`,
-    chunkFilename: isDevelopment ? '[id].css' : `${options.appName}-[id]-[hash].css`,
+    filename: isDevelopment ? '[name].css' : `${options.appName}-[hash:8].css`,
+    chunkFilename: isDevelopment ? '[id].css' : `${options.appName}-[id]-[hash:8].css`,
   })
 
   const manifestPlugin = new ManifestPlugin({

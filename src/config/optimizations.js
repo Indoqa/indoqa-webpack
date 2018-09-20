@@ -1,4 +1,5 @@
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const OPTIMIZATIONS = {
   optimization: {
@@ -13,6 +14,7 @@ const OPTIMIZATIONS = {
         cache: true,
         sourceMap: true,
       }),
+      new OptimizeCSSAssetsPlugin({})
     ],
     splitChunks: {
       chunks: 'all',
