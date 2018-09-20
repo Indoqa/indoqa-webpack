@@ -15,7 +15,7 @@ const createOptions = require('./createOptions.js')
 
 const printFileSizes = (buildDir, stats) => {
   const assets = stats.toJson().assets
-    .filter((asset) => /\.(js|css)$/.test(asset.name))
+    .filter((asset) => /\.(js|css|json)$/.test(asset.name))
     .map((asset) => {
       const assetPath = path.join(buildDir, asset.name)
       const fileContents = fs.readFileSync(assetPath)
