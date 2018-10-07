@@ -4,16 +4,16 @@ const chalk = require('chalk')
 const DEFAULT_OPTIONS = {
   appName: 'app',
 
-  outputPath: './target/assets/',
+  outputPath: './target/webpack/assets/',
   outputPublicPath: '/assets/',
   srcPath: './src',
-  mainJs: './src/main/index.js',
-  playgroundJs: './src/playground/index.js',
+  entry: './src/main/index.js',
+  playgroundEntry: './src/playground/index.js',
 
   devPort: 3000,
   uglify: true,
   createSourceMap: true,
-  createIndexHtml: false,
+  createIndexHtml: true,
   autoprefixerBrowser: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 11'],
 
   isLibrary: false,
