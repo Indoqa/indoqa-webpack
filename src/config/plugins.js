@@ -17,6 +17,7 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
   const createIndexHTMLPlugin = new HtmlWebpackPlugin({
     title: options.appName,
     inject: true,
+    filename: '../index.html',
     template: path.join(__dirname, 'index.html'),
   })
 
