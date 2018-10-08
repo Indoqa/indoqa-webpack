@@ -42,7 +42,7 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
   })
 
   const manifestPlugin = new ManifestPlugin({
-    fileName: 'asset-manifest.json',
+    fileName: '../asset-manifest.json',
     publicPath: options.outputPublicPath,
   })
   compilePlugins.push(manifestPlugin)
@@ -64,7 +64,6 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
       new webpack.NamedModulesPlugin(),
       new webpack.HotModuleReplacementPlugin(),
       ignoreMomentJsLocaleResourcesPlugin,
-      manifestPlugin
     ]
   }
 
