@@ -32,6 +32,12 @@ const validate = options => {
   if (options.hasOwnProperty('babelLoaderProdPlugins')) {
     console.log(chalk.red('The property babelLoaderProdPlugins is not supported any longer. Please remove it.'))
   }
+  if (options.hasOwnProperty('mainJs')) {
+    console.log(chalk.red('The property mainJs was replaced by entry. Please change it.'))
+  }
+  if (options.hasOwnProperty('playgroundJs')) {
+    console.log(chalk.red('The property playgroundJs was replaced by playgroundEntry. Please change it.'))
+  }
 }
 
 const createOptions = (userOptions) => {
