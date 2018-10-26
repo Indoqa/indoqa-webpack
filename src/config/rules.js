@@ -22,7 +22,9 @@ const createJavascriptRule = (isDevelopment) => {
         options: {
           babelrc: false,
           presets: [require.resolve('babel-preset-react-app')],
+          plugins: ['react-hot-loader/babel'],
           compact: true,
+          cacheDirectory: true
         },
       },
     }
