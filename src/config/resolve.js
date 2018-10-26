@@ -1,9 +1,8 @@
-const fs = require('fs')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 const createResolve = (options) => {
   const plugins = []
-  if (fs.existsSync(options.tsconfigPath)) {
+  if (options.isTypescript) {
     plugins.push(new TsconfigPathsPlugin({
       configFile: options.tsconfigPath,
     }))

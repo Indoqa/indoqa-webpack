@@ -1,5 +1,6 @@
 const path = require('path')
 const chalk = require('chalk')
+const fs = require('fs')
 
 const DEFAULT_OPTIONS = {
   appName: 'app',
@@ -47,6 +48,7 @@ const createOptions = (userOptions) => {
   userOptions.tsconfigPath = path.join(process.cwd(), 'tsconfig.json')
   userOptions.tslintPath = path.join(process.cwd(), 'tslint.json')
   userOptions.srcPath = path.join(process.cwd(), 'src')
+  userOptions.isTypescript = fs.existsSync(userOptions.tsconfigPath)
   const options = Object.assign({}, DEFAULT_OPTIONS, userOptions)
 
   validate(options)

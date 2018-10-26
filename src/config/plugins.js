@@ -48,12 +48,14 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
   })
   compilePlugins.push(manifestPlugin)
 
-  const forkTsCheckerPlugin = new ForkTsCheckerWebpackPlugin({
-    async: false,
-    tsconfig: options.tsconfigPath,
-    tslint: options.tslintPath,
-  })
-  compilePlugins.push(forkTsCheckerPlugin)
+  if (options.isTypescript) {
+    const forkTsCheckerPlugin = new ForkTsCheckerWebpackPlugin({
+      async: false,
+      tsconfig: options.tsconfigPath,
+      tslint: options.tslintPath,
+    })
+    compilePlugins.push(forkTsCheckerPlugin)
+  }
 
   if (isLibrary && !isDevelopment) {
     return [
@@ -64,21 +66,27 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
   }
 
   if (isDevelopment) {
-    return [
+    const devPlugins = [
       definePlugin,
       extractCssPlugin,
       createIndexHTMLPlugin,
       new webpack.NamedModulesPlugin(),
       new webpack.HotModuleReplacementPlugin(),
       ignoreMomentJsLocaleResourcesPlugin,
-      new ForkTsCheckerWebpackPlugin({
+    ]
+
+    if (options.isTypescript) {
+      const forkTsChecker = new ForkTsCheckerWebpackPlugin({
         async: false,
         watch: options.srcPath,
         tsconfig: options.tsconfigPath,
         // we use editors (VSCode, IntelliJ) that already perform linting
         // tslint: options.tslintPath,
-      }),
-    ]
+      })
+      devPlugins.push(forkTsChecker)
+    }
+
+    return devPlugins
   }
 
   if (options.createIndexHtml) {
