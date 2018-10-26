@@ -21,10 +21,7 @@ const createJavascriptRule = (isDevelopment) => {
         loader: 'babel-loader',
         options: {
           babelrc: false,
-          presets: [require.resolve('babel-preset-react-app'), 'react-hmre'],
-          plugins: [
-            require.resolve('babel-plugin-transform-react-constant-elements')
-          ],
+          presets: [require.resolve('babel-preset-react-app')],
           compact: true,
         },
       },
@@ -39,9 +36,6 @@ const createJavascriptRule = (isDevelopment) => {
       options: {
         babelrc: false,
         presets: [require.resolve('babel-preset-react-app')],
-        plugins: [
-          require.resolve('babel-plugin-transform-react-constant-elements')
-        ],
         cacheDirectory: true,
       },
     },
