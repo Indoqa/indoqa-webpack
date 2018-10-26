@@ -45,6 +45,8 @@ const validate = options => {
 const createOptions = (userOptions) => {
   userOptions.isLibrary = userOptions.isLibrary || userOptions.isReactLibrary
   userOptions.tsconfigPath = path.join(process.cwd(), 'tsconfig.json')
+  userOptions.tslintPath = path.join(process.cwd(), 'tslint.json')
+  userOptions.srcPath = path.join(process.cwd(), 'src')
   const options = Object.assign({}, DEFAULT_OPTIONS, userOptions)
 
   validate(options)

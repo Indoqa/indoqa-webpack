@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const createPlugins = (options, isDevelopment, isLibrary) => {
   const definePlugin = new webpack.DefinePlugin({
@@ -64,6 +65,12 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
       new webpack.NamedModulesPlugin(),
       new webpack.HotModuleReplacementPlugin(),
       ignoreMomentJsLocaleResourcesPlugin,
+      new ForkTsCheckerWebpackPlugin({
+        async: false,
+        watch: options.srcPath,
+        tsconfig: options.tsconfigPath,
+        tslint: options.tslintPath,
+      }),
     ]
   }
 
