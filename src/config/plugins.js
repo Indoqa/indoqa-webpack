@@ -48,8 +48,14 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
   })
   compilePlugins.push(manifestPlugin)
 
-  if
-  (isLibrary && !isDevelopment) {
+  const forkTsCheckerPlugin = new ForkTsCheckerWebpackPlugin({
+    async: false,
+    tsconfig: options.tsconfigPath,
+    tslint: options.tslintPath,
+  })
+  compilePlugins.push(forkTsCheckerPlugin)
+
+  if (isLibrary && !isDevelopment) {
     return [
       definePlugin,
       extractCssPlugin,
@@ -69,7 +75,8 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
         async: false,
         watch: options.srcPath,
         tsconfig: options.tsconfigPath,
-        tslint: options.tslintPath,
+        // we use editors (VSCode, IntelliJ) that already perform linting
+        // tslint: options.tslintPath,
       }),
     ]
   }
