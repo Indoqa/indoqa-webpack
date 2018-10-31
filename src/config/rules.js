@@ -21,6 +21,7 @@ const createJavascriptRule = (isDevelopment) => {
         loader: 'babel-loader',
         options: {
           babelrc: false,
+          configFile: false,
           presets: [require.resolve('babel-preset-react-app')],
           plugins: ['react-hot-loader/babel'],
           compact: true,
@@ -39,6 +40,9 @@ const createJavascriptRule = (isDevelopment) => {
         babelrc: false,
         presets: [require.resolve('babel-preset-react-app')],
         cacheDirectory: true,
+        customize: require.resolve(
+          'babel-preset-react-app/webpack-overrides'
+        ),
       },
     },
   }
