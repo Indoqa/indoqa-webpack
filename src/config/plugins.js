@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 const createPlugins = (options, isDevelopment, isLibrary) => {
   const definePlugin = new webpack.DefinePlugin({
@@ -75,7 +75,7 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
       ignoreMomentJsLocaleResourcesPlugin,
     ]
 
-    if (options.isTypescript) {
+    if (options.isTypescript && options.tsDevTypeChecking) {
       const forkTsChecker = new ForkTsCheckerWebpackPlugin({
         async: false,
         watch: options.srcPath,

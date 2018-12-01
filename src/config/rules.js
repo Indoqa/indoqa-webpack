@@ -49,6 +49,19 @@ const createJavascriptRule = (isDevelopment) => {
 }
 
 const createTypescriptRule = (options) => {
+  if (options.tsAwesomeTypescriptLoader) {
+    return {
+      test: /\.tsx?$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'awesome-typescript-loader',
+        options: {
+          transpileOnly: true,
+          useCache: true,
+        },
+      },
+    }
+  }
   return {
     test: /\.tsx?$/,
     exclude: /node_modules/,

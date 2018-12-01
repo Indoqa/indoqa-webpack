@@ -17,6 +17,9 @@ const DEFAULT_OPTIONS = {
   createIndexHtml: true,
   autoprefixerBrowser: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 11'],
 
+  tsDevTypeChecking: false,
+  tsAwesomeTypescriptLoader: false,
+
   isLibrary: false,
   outputLibraryPath: './dist/',
 }
@@ -37,7 +40,7 @@ const validate = options => {
   if (options.hasOwnProperty('mainJs')) {
     console.log(chalk.red('The property mainJs was replaced by entry. Please change it.'))
   }
-  
+
   if (options.hasOwnProperty('playgroundJs')) {
     console.log(chalk.red('The property playgroundJs was replaced by playgroundEntry. Please change it.'))
   }
