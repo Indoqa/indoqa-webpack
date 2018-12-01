@@ -65,13 +65,26 @@ const createTypescriptRule = (options) => {
   return {
     test: /\.tsx?$/,
     exclude: /node_modules/,
-    use: {
-      loader: 'ts-loader',
-      options: {
-        transpileOnly: true,
-        configFile: options.tsconfigPath,
+    use: [
+      {
+        loader: 'cache-loader'
       },
-    },
+      // does not currently work with ts-loader@5.3.1 and typescript@3.2.1
+      // {
+      //   loader: 'thread-loader',
+      //   options: {
+      //     // there should be 1 cpu for the fork-ts-checker-webpack-plugin
+      //     workers: require('os').cpus().length - 1,
+      //   },
+      // },
+      {
+        loader: 'ts-loader',
+        options: {
+          transpileOnly: true,
+          configFile: options.tsconfigPath,
+        },
+      }
+    ],
   }
 }
 
