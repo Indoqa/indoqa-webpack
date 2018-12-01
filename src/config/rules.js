@@ -62,6 +62,8 @@ const createTypescriptRule = (options) => {
       },
     }
   }
+
+  // see https://github.com/TypeStrong/ts-loader/tree/master/examples
   return {
     test: /\.tsx?$/,
     exclude: /node_modules/,
