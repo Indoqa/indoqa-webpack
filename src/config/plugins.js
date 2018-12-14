@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin')
 
@@ -60,6 +61,12 @@ const createPlugins = (options, isDevelopment, isLibrary) => {
     /moment$/
   )
   compilePlugins.push(ignoreMomentJsLocaleResourcesPlugin)
+
+  const manifestPlugin = new ManifestPlugin({
+    fileName: '../asset-manifest.json',
+    publicPath: options.outputPublicPath,
+  })
+  compilePlugins.push(manifestPlugin)
 
   if (isLibrary && !isDevelopment) {
     return [

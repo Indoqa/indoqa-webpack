@@ -3,7 +3,7 @@ const chalk = require('chalk')
 const DEFAULT_OPTIONS = {
   appName: 'app',
 
-  outputPath: './target/assets/',
+  outputPath: './target/webpack/assets/',
   outputPublicPath: '/assets/',
   srcPath: './src',
   mainJs: './src/main/index.js',
