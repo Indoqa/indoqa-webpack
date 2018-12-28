@@ -8,43 +8,20 @@
 
 The goal of indoqa-webpack is supporting following use cases:
 
- * create production-ready release artifacts (Javascript, CSS)
- * provide a hot-reloadable development server using [express](http://expressjs.com)
- * support for Javascript libraries and make use of [externals](https://webpack.github.io/docs/library-and-externals.html)
- * out-of-the-box usage for [Jest](https://facebook.github.io/jest/) tests
- * out-of-the-box configuration of [ESLint](http://eslint.org/) using [eslint-config-indoqa](https://github.com/Indoqa/eslint-config-indoqa)
- * hide webpack configurations and provide a declarative configuration
  * simple upgrade path to newer versions of indoqa-webpack
+ * hide webpack configurations and provide a declarative configuration
+ * support for ES6 and Typescript builds
+ * support code-splitting
+ * create production-ready release artifacts (Javascript, CSS)
+ * provide a hot-reloadable development server using [express](http://expressjs.com) * out-of-the-box usage for [Jest](https://facebook.github.io/jest/) tests
+ * out-of-the-box configuration of [ESLint](http://eslint.org/) using [eslint-config-indoqa](https://github.com/Indoqa/eslint-config-indoqa)
 
-## Usage
 
-### Production build
+## Changelog
+[Learn about the lastest improvements](./CHANGELOG.md)
 
-TBD (es6, pollyfills, css extraction, usage, ref to sample)
+## Example
 
-### Dev mode
+See [indoqa-react-redux-ts](https://github.com/Indoqa/indoqa-react-redux-ts)
+for an example of how to setup the store, the history and the fela renderer with hot-reload enabled.
 
-TBD (dev server, hot-reload, usage, ref to sample)
-
-### Building libraries
-
-TBD (externals, peer dependencies, .npmignore, usage, ref to sample)
-
-### Setting up a playground (usually for libraries)
-
-TBD (usage, ref to sample)
-
-### Jest
-
-TBD (directory structure, usage, ref to sample)
-
-### ESLint configuration
-
-TBD (usage, ref to sample)
-
-## Todos
-
- * Webpack 4 support (see [CreateReactApp - Webpack 4 upgrade](https://github.com/facebook/create-react-app/pull/4077))
- * preset env
- * [Error Overlay Webpack Plugin](https://github.com/smooth-code/error-overlay-webpack-plugin/blob/master/README.md)
- * Optimize debugging experience
