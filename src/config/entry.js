@@ -1,7 +1,5 @@
 const path = require('path')
 
-const polyfills = require.resolve('react-app-polyfill/ie11')
-
 const createEntry = (options, isDevelopment, isLibrary) => {
   const mainJsPath = path.join(process.cwd(), options.mainJs)
   const playgroundJsPath = path.join(process.cwd(), options.playgroundJs)
@@ -11,7 +9,7 @@ const createEntry = (options, isDevelopment, isLibrary) => {
     const jsPath = options.isLibrary ? playgroundJsPath : mainJsPath
     const webpackHmr = require.resolve('react-dev-utils/webpackHotDevClient')
     return {
-      [appName]: [webpackHmr, polyfills, jsPath],
+      [appName]: [webpackHmr, jsPath],
     }
   }
 
@@ -20,7 +18,7 @@ const createEntry = (options, isDevelopment, isLibrary) => {
   }
 
   return {
-    [appName]: [polyfills, mainJsPath],
+    [appName]: [mainJsPath],
   }
 }
 

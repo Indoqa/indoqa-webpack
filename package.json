@@ -56,7 +56,6 @@
     "postcss-loader": "^3.0.0",
     "promise": "^8.0.1",
     "react": "^16.4.2",
-    "react-app-polyfill": "^0.2.1",
     "react-dev-utils": "^5.0.0",
     "react-dom": "^16.4.2",
     "rimraf": "^2.6.2",
