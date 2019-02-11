@@ -1,3 +1,9 @@
+# v2.2.0 | TBA
+* remove polyfills
+
+# v1.5.0 | TBA
+* remove polyfills
+
 # v1.4.0 | 2018-12-14
 * create asset-manifest.json
 
