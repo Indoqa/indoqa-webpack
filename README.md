@@ -1,4 +1,1 @@
-# Indoqa Webpack
-
-This is a maintenance branch using webpack@2.
-Please upgrade to the latest version of indoqa-webpack.
+This repository is depcreated. It has been integrated into [@indoqa/webpack-ts](https://github.com/Indoqa/indoqa-react/tree/master/packages/webpack-ts)
